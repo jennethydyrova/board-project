@@ -4,7 +4,7 @@ import ItemForm from "../item/ItemForm";
 
 const Board = () => {
   const [newBoard, setNewBoard] = useState({
-    items: "",
+    items: [],
     title: "",
   });
   //   const [itemValues, setItemValues] = useState({

@@ -2,51 +2,36 @@ import React, { useState, useEffect } from "react";
 import db from "../../firebaseConfig";
 
 const ItemForm = ({ newBoard }) => {
-  // console.log(newBoard);
-  const [newItem, setNewItem] = useState({
-    items: [],
-  });
+  const [items, setItems] = useState(newBoard.items);
+  const [userInput, setUserInput] = useState("");
 
   const addItem = () => {
     db.collection("boards")
       .doc("board1")
       .set({
-        items: [...newBoard],
-        // title: newBoard.title,
+        items: [...items],
       });
   };
 
-  console.log(newBoard.items);
+  console.log(items);
 
   const handleInputValue = (e) => {
-    setNewItem({ ...newBoard, [e.target.name]: e.target.value });
+    setUserInput(e.target.value);
   };
+  useEffect(() => {
+    addItem();
+  }, [items]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    addItem();
+    setItems([...items, userInput]);
   };
-
-  // const addNewItem = (e) => {
-  //   return (
-  //     <input
-  //       name="title"
-  //       value={newItem}
-  //       onChange={(e) => handleInputValue(e)}
-  //     />
-  //   );
-  // };
 
   return (
     <div>
-      <form>
-        <input
-          name="items"
-          value={newBoard.items}
-          onChange={(e) => handleInputValue(e)}
-        />
-
-        {/* <button onClick={(e) => addNewItem(e)}>Add another item</button> */}
-        <button onSubmit={(e) => handleSubmit(e)}>Add Item</button>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <input name="items" onChange={(e) => handleInputValue(e)} />
+        <button>Add Item</button>
       </form>
     </div>
   );
