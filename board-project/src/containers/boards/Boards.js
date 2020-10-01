@@ -1,32 +1,30 @@
 import React, { useState, useEffect } from "react";
 import db from "../../firebaseConfig";
-// import Board from "./";
+import Board from "../../components/board/Board";
 
 const BoardsContainer = () => {
-  const [boards, setBoards] = useState([]);
+  const [boards, setBoards] = useState([
+    {
+      title: "",
+      items: [],
+    },
+  ]);
 
   useEffect(() => {
     async function fetchBoardsData() {
       const boardsResponse = await db.collection("boards").get();
       const boardsData = boardsResponse.docs.map((board) => board.data());
-      //   console.log(boardsData);
       setBoards(boardsData);
     }
     fetchBoardsData();
   }, []);
-  console.log(boards);
+  console.log("boards", boards);
 
   return (
     <div>
       {boards.map((el, index) => {
         return (
-          <div key={index}>
-            <h3>{el.title}</h3>
-
-            {/* {el.items.map((item) => {
-              return <p>{item}</p>;
-            })} */}
-          </div>
+          <Board key={el + index} oneBoard={el.title} boardsItems={el.items} />
         );
       })}
     </div>
@@ -40,20 +38,11 @@ const BoardsContainer = () => {
 
 export default BoardsContainer;
 
-// const [recipe, setRecipe] = useState([]);
+/* <h3>{el.title}</h3> */
 
-//   useEffect(() => {
-//     async function fetchRecipeData() {
-//       const recipeResponse = await db.collection("recipe").doc("FAL1").get();
-//       const recipeData = recipeResponse.data();
-//       // const items = inventoryResponse.docs.map((item) => item.data());
-//       setRecipe(recipeData.ingredients);
-//     }
-//     fetchRecipeData();
-//   }, []);
-//   return (
-//     <div className="recipesContainer">
-//       <RecipeTable recipe={recipe} />
-//       <AddRecipeForm />
-//     </div>
-//   );
+//           {/* <Board oneBoard={el} /> */}
+//           {/* {el.items.map((item) => {
+//             return <p>{item}</p>;
+//           })} */}
+
+// <div key={index + el}>{el}</div>

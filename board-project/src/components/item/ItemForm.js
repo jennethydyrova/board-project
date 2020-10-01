@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import db from "../../firebaseConfig";
 
-const ItemForm = ({ newBoard }) => {
-  const [items, setItems] = useState(newBoard.items);
+const ItemForm = ({ oneBoard, boardsItems }) => {
+  // const [items, setItems] = useState(oneBoard);
+  const [items, setItems] = useState(boardsItems);
   const [userInput, setUserInput] = useState("");
 
   const addItem = () => {
     db.collection("boards")
-      .doc("board1")
+      .doc(oneBoard)
       .set({
         items: [...items],
       });
@@ -15,12 +16,13 @@ const ItemForm = ({ newBoard }) => {
 
   console.log(items);
 
-  const handleInputValue = (e) => {
-    setUserInput(e.target.value);
-  };
   useEffect(() => {
     addItem();
   }, [items]);
+
+  const handleInputValue = (e) => {
+    setUserInput(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
