@@ -6,11 +6,15 @@ const ItemForm = ({ boardTitle, boardsItems }) => {
   const [items, setItems] = useState(boardsItems);
   const [userInput, setUserInput] = useState("");
 
-  const addItem = () => {
-    db.collection("boards")
-      .doc(boardTitle)
+  const docId = db.collection("boards").doc().id;
+
+  const addItem = async () => {
+    await db
+      .collection("boards")
+      .doc(docId)
       .update({
         items: [...items],
+        boardTitle: boardTitle,
       });
     setItems([...items, userInput]);
   };

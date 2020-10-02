@@ -5,9 +5,10 @@ const BoardForm = ({ fetchBoardData }) => {
   const [newBoard, setNewBoard] = useState({
     title: "",
   });
+  const docId = db.collection("boards").doc().id;
 
   const addBoard = async () => {
-    await db.collection("boards").doc(newBoard.title).set({
+    await db.collection("boards").doc(docId).set({
       title: newBoard.title,
       items: [],
     });
