@@ -31,6 +31,7 @@ const BoardsContainer = () => {
             key={el + index}
             boardTitle={el.title}
             boardsItems={el.items}
+            boardsId = {el.id}
           />
         );
       })}

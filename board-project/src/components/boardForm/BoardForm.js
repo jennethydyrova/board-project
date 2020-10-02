@@ -8,9 +8,11 @@ const BoardForm = ({ fetchBoardData }) => {
   const docId = db.collection("boards").doc().id;
 
   const addBoard = async () => {
+    
     await db.collection("boards").doc(docId).set({
       title: newBoard.title,
       items: [],
+      id: docId
     });
     fetchBoardData((prevState) => prevState + 1);
   };
