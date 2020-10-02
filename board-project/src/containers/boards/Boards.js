@@ -27,7 +27,11 @@ const BoardsContainer = () => {
     <div>
       {boards.map((el, index) => {
         return (
-          <Board key={el + index} oneBoard={el.title} boardsItems={el.items} />
+          <Board
+            key={el + index}
+            boardTitle={el.title}
+            boardsItems={el.items}
+          />
         );
       })}
       <div>

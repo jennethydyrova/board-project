@@ -22,6 +22,7 @@ const BoardForm = ({ fetchBoardData }) => {
     e.preventDefault();
     addBoard();
   };
+
   return (
     <div>
       <form>
