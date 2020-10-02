@@ -14,7 +14,7 @@ const BoardForm = ({ fetchBoardData }) => {
     });
     fetchBoardData((prevState) => prevState + 1);
   };
-
+  console.log(docId);
   const handleInputValue = (e) => {
     setNewBoard({ ...newBoard, [e.target.name]: e.target.value });
   };

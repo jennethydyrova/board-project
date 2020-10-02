@@ -17,6 +17,7 @@ const BoardsContainer = () => {
       const boardsResponse = await db.collection("boards").get();
       const boardsData = boardsResponse.docs.map((board) => board.data());
       setBoards(boardsData);
+      console.log(boardsResponse);
     }
     fetchBoardsData();
   }, [fetchBoardData]);
