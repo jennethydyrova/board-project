@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import db from "../../firebaseConfig";
 import Board from "../../components/board/Board";
+import BoardsForm from "../../components/boardForm/BoardForm";
 
 const BoardsContainer = () => {
   const [boards, setBoards] = useState([
@@ -9,6 +10,7 @@ const BoardsContainer = () => {
       items: [],
     },
   ]);
+  const [fetchBoardData, setFetchData] = useState(0);
 
   useEffect(() => {
     async function fetchBoardsData() {
@@ -17,7 +19,8 @@ const BoardsContainer = () => {
       setBoards(boardsData);
     }
     fetchBoardsData();
-  }, []);
+  }, [fetchBoardData]);
+
   console.log("boards", boards);
 
   return (
@@ -27,6 +30,9 @@ const BoardsContainer = () => {
           <Board key={el + index} oneBoard={el.title} boardsItems={el.items} />
         );
       })}
+      <div>
+        <BoardsForm fetchBoardData={setFetchData} />
+      </div>
     </div>
   );
 

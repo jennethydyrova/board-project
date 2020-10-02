@@ -6,18 +6,18 @@ const ItemForm = ({ oneBoard, boardsItems }) => {
   const [items, setItems] = useState(boardsItems);
   const [userInput, setUserInput] = useState("");
 
-  const addItem = () => {
-    db.collection("boards")
-      .doc(oneBoard)
-      .set({
-        items: [...items],
-      });
-  };
+  // const addItem = () => {
+  //   db.collection("boards")
+  //     .doc()
+  //     .set({
+  //       items: [...items],
+  //     });
+  // };
 
-  console.log(items);
+  // console.log(items);
 
   useEffect(() => {
-    addItem();
+    // addItem();
   }, [items]);
 
   const handleInputValue = (e) => {
