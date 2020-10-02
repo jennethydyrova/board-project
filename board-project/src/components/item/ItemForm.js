@@ -29,12 +29,13 @@ const ItemForm = ({ boardTitle, boardsItems, boardsId, itemData}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addItem();
+    setUserInput("")
   };
 
   return (
     <div>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <input name="items" onChange={(e) => handleInputValue(e)} />
+        <input name="items" onChange={(e) => handleInputValue(e)} value={userInput} />
         <button>Add Item</button>
       </form>
     </div>

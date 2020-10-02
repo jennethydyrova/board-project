@@ -24,6 +24,9 @@ const BoardForm = ({ fetchBoardData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addBoard();
+    setNewBoard({
+      title:""
+    })
   };
 
   return (
