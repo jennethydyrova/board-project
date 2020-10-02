@@ -8,6 +8,7 @@ const BoardsContainer = () => {
     {
       title: "",
       items: [],
+      id: "random string"
     },
   ]);
   const [fetchBoardData, setFetchData] = useState(0);
@@ -21,24 +22,26 @@ const BoardsContainer = () => {
     fetchBoardsData();
   }, [fetchBoardData]);
 
-  console.log("boards", boards);
+  // console.log("boards", boards);
 
   return (
-    <div>
-      {boards.map((el, index) => {
-        return (
-          <Board
-            key={el + index}
-            boardTitle={el.title}
-            boardsItems={el.items}
-            boardsId = {el.id}
-          />
-        );
-      })}
+    <>
       <div>
-        <BoardsForm fetchBoardData={setFetchData} />
+          <BoardsForm fetchBoardData={setFetchData} />
       </div>
-    </div>
+      <div>
+        {boards.map((el, index) => {
+          return (
+            <Board
+              key={el + index}
+              boardTitle={el.title}
+              boardsItems={el.items}
+              boardsId = {el.id}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 
   //   db.collection("cities").doc("SF")

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-
 import ItemForm from "../item/ItemForm";
+import Items from "../../containers/items/Items"
 
 const Board = ({ boardTitle, boardsItems, boardsId }) => {
   // console.log("boarditems", boardsItems);
@@ -8,10 +8,11 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
   return (
     <div>
       <h3>{boardTitle}</h3>
-      {boardsItems.map((item, index) => {
+      <Items boardTitle = {boardTitle} boardsId ={boardsId} boardsItems={boardsItems}/>
+      {/* {boardsItems.map((item, index) => {
         return <p key={item + index}>{item}</p>;
-      })}
-      <ItemForm boardTitle={boardTitle} boardsItems={boardsItems} boardsId={boardsId} />
+      })} */}
+      {/* <ItemForm boardTitle={boardTitle} boardsItems={boardsItems} boardsId={boardsId} /> */}
     </div>
   );
 };
