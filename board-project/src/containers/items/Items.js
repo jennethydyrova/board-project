@@ -21,7 +21,6 @@ const ItemsContainer = ({ boardsItems, boardTitle, boardsId }) => {
     fetchItems();
   }, [followedItems]);
 
-  console.log("type", items.items[0].id);
   return (
     <>
       <div>
