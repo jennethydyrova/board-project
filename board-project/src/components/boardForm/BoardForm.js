@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import db from "../../firebaseConfig";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const BoardForm = ({ fetchBoardData }) => {
   const [newBoard, setNewBoard] = useState({
@@ -8,11 +10,10 @@ const BoardForm = ({ fetchBoardData }) => {
   const docId = db.collection("boards").doc().id;
 
   const addBoard = async () => {
-    
     await db.collection("boards").doc(docId).set({
       title: newBoard.title,
       items: [],
-      id: docId
+      id: docId,
     });
     fetchBoardData((prevState) => prevState + 1);
   };
@@ -24,18 +25,36 @@ const BoardForm = ({ fetchBoardData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addBoard();
+    setNewBoard({
+      title: "",
+    });
   };
 
   return (
     <div>
-      <form>
-        <input
-          name="title"
-          value={newBoard.title}
-          onChange={(e) => handleInputValue(e)}
-        ></input>
-        <button onClick={(e) => handleSubmit(e)}>Add board</button>
-      </form>
+      <Form>
+        <Form.Row>
+          <Form.Group controlId="addBoard">
+            <Form.Control
+              type="text"
+              placeholder="Enter board name"
+              name="title"
+              value={newBoard.title}
+              onChange={(e) => handleInputValue(e)}
+            />
+          </Form.Group>
+        </Form.Row>
+        {/* <input></input> */}
+        <Button
+          variant="outline-info"
+          type="submit"
+          size="sm"
+          onClick={(e) => handleSubmit(e)}
+        >
+          Add Board
+        </Button>
+        {/* <button >Add board</button> */}
+      </Form>
     </div>
   );
 };

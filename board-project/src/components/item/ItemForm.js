@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import db from "../../firebaseConfig";
 
-const ItemForm = ({ boardTitle, boardsItems, boardsId }) => {
+const ItemForm = ({ boardTitle, boardsItems, boardsId, itemData }) => {
   // const [items, setItems] = useState(oneBoard);
   const [items, setItems] = useState(boardsItems);
   const [userInput, setUserInput] = useState("");
@@ -9,20 +9,18 @@ const ItemForm = ({ boardTitle, boardsItems, boardsId }) => {
   // const docId = db.collection("boards").doc().id;
 
   const addItem = async () => {
-    console.log(boardsId);
+    // console.log(boardsId)
     await db
       .collection("boards")
       .doc(boardsId)
       .update({
-        items: [...items],
-        boardTitle: boardTitle,
+        items: [...items, userInput],
       });
     setItems([...items, userInput]);
+    itemData((prevState) => prevState + 1);
   };
 
-  // console.log(items);
-
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   const handleInputValue = (e) => {
     setUserInput(e.target.value);
@@ -31,12 +29,17 @@ const ItemForm = ({ boardTitle, boardsItems, boardsId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addItem();
+    setUserInput("");
   };
 
   return (
     <div>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <input name="items" onChange={(e) => handleInputValue(e)} />
+        <input
+          name="items"
+          onChange={(e) => handleInputValue(e)}
+          value={userInput}
+        />
         <button>Add Item</button>
       </form>
     </div>
