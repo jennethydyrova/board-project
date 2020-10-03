@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import db from "../../firebaseConfig";
 
-const ItemForm = ({ boardTitle, boardsItems }) => {
+const ItemForm = ({ boardTitle, boardsItems, boardsId }) => {
   // const [items, setItems] = useState(oneBoard);
   const [items, setItems] = useState(boardsItems);
   const [userInput, setUserInput] = useState("");
@@ -9,9 +9,10 @@ const ItemForm = ({ boardTitle, boardsItems }) => {
   // const docId = db.collection("boards").doc().id;
 
   const addItem = async () => {
+    console.log(boardsId);
     await db
       .collection("boards")
-      .doc()
+      .doc(boardsId)
       .update({
         items: [...items],
         boardTitle: boardTitle,
