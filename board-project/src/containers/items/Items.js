@@ -9,18 +9,26 @@ const ItemsContainer = ({ boardsItems, boardTitle, boardsId }) => {
   });
 
   const [followedItems, setFollowedItems] = useState(0);
-  useEffect(() => {
-    async function fetchItems() {
-      const itemsResponse = await db.collection("boards").doc(boardsId).get();
-      const itemsData = itemsResponse.data();
-      setItems(itemsData === undefined ? items : itemsData);
 
-      //   console.log("data", itemsData);
-      //   console.log("gds", items);
-    }
-    fetchItems();
-  }, [followedItems]);
+  db.collection("boards")
+    .orderBy("name")
+    .onSnapshot((snapshot) => {
+      let changes = snapshot.docChanges();
+      console.log(changes);
+    });
+  // useEffect(() => {
+  //   async function fetchItems() {
+  //     const itemsResponse = await db.collection("boards").doc(boardsId).get();
+  //     const itemsData = itemsResponse.data();
+  //     setItems(itemsData === undefined ? items : itemsData);
 
+  //     //   console.log("data", itemsData);
+  //     //   console.log("gds", items);
+  //   }
+  //   fetchItems();
+  // }, [followedItems]);
+
+  //   console.log("type", items.items[0].id);
   return (
     <>
       <div>

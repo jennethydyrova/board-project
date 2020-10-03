@@ -7,7 +7,9 @@ const BoardForm = ({ fetchBoardData }) => {
   const [newBoard, setNewBoard] = useState({
     title: "",
   });
+
   const docId = db.collection("boards").doc().id;
+  console.log("docid", docId);
 
   const addBoard = async () => {
     await db.collection("boards").doc(docId).update({

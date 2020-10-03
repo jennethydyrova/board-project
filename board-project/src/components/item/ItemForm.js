@@ -38,7 +38,7 @@ const ItemForm = ({ boardTitle, boardsItems, boardsId, itemData }) => {
         <input
           name="items"
           onChange={(e) => handleInputValue(e)}
-          value={userInput}
+          value={userInput.title}
         />
         <button>Add Item</button>
       </form>
