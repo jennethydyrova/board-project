@@ -6,7 +6,8 @@ const ItemForm = ({ boardTitle, boardsItems, boardsId, itemData }) => {
   const [items, setItems] = useState(boardsItems);
   const [userInput, setUserInput] = useState("");
 
-  // const docId = db.collection("boards").doc().id;
+  const docId = db.collection("boards").doc().data().item.id;
+  console.log("itemID", docId);
 
   const addItem = async () => {
     // console.log(boardsId)

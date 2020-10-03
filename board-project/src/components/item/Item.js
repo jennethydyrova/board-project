@@ -1,11 +1,7 @@
-import React, {useState, useEffect} from "react"
+import React, { useState, useEffect } from "react";
 
-const Item = ({task}) => {
+const Item = ({ task }) => {
+  return <p>{task}</p>;
+};
 
-
-    return (
-        <p>{task}</p>
-    )
-}
-
-export default Item
+export default Item;

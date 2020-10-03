@@ -10,14 +10,14 @@ const BoardForm = ({ fetchBoardData }) => {
   const docId = db.collection("boards").doc().id;
 
   const addBoard = async () => {
-    await db.collection("boards").doc(docId).set({
+    await db.collection("boards").doc(docId).update({
       title: newBoard.title,
       items: [],
       id: docId,
     });
     fetchBoardData((prevState) => prevState + 1);
   };
-  console.log(docId);
+  // console.log(docId);
   const handleInputValue = (e) => {
     setNewBoard({ ...newBoard, [e.target.name]: e.target.value });
   };
