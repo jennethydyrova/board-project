@@ -1,44 +1,62 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import db from "../../firebaseConfig";
 import Board from "../../components/board/Board";
 import BoardsForm from "../../components/boardForm/BoardForm";
 
 const BoardsContainer = () => {
-  const [boards, setBoards] = useState([
-  ]);
-  const [fetchBoardData, setFetchData] = useState(0);
+  const [boards, setBoards] = useState([]);
+  // const [fetchBoardData, setFetchData] = useState(0);
 
   //it console.logs now random string. it means that we don't assign newly generated id to board id
   //I added something random to see how it behaves, because doc() doesn't accept empty string as an arg
 
   // const docId = db.collection("boards").doc().id;
 
-  db.collection("boards")
-    .orderBy("title")
-    .onSnapshot((snapshot) => {
-      let changes = snapshot.docChanges();
-      setBoards(changes.map((change)=> {
-        return change.doc.data()
-      }))
-      
+  // db.collection("boards")
+  //   .orderBy("title")
+  //   .onSnapshot((snapshot) => {
+  //     let changes = snapshot.docChanges();
+  //     setBoards(
+  //       changes.map((change) => {
+  //         return change.doc.data();
+  //       })
+  //     );
+  //   });
+
+  useEffect(() => {
+    // const boardsResponse = await db.collection("boards").get();
+    // const boardsData = boardsResponse.docs.map((board) => board.data());
+    // setBoards(boardsData);
+    // console.log(boardsResponse);
+    return db.collection("boards").onSnapshot((snapshot) => {
+      const boardData = [];
+      snapshot.docChanges().forEach(
+        // (doc) => boardData.push({ ...doc.data(), id: doc.id })
+        (change) => {
+          if (change.type === "added") {
+            console.log("added");
+            setBoards((prevBoards) => [
+              ...prevBoards,
+              { ...change.doc.data(), id: change.doc.id },
+            ]);
+            // boardData.push();
+            // console.log(change.doc.data());
+          }
+          if (change.type === "modified") {
+            console.log(change.doc.data(), change.doc.id);
+            // console.log(boards);
+          }
+        }
+      );
+      // setBoards([...boards, boardData]);
     });
+  }, []);
 
-  //  useEffect(() => {
-  //   async function fetchBoardsData() {
-  //     const boardsResponse = await db.collection("boards").get();
-  //     const boardsData = boardsResponse.docs.map((board) => board.data());
-  //     setBoards(boardsData);
-  //     console.log(boardsResponse);
-  //   }
-  //   fetchBoardsData()
-  // },[])
-
-
-
+  console.log(boards);
   return (
     <>
       <div>
-        <BoardsForm fetchBoardData={setFetchData} />
+        <BoardsForm />
       </div>
       <div>
         {boards.map((el) => {
@@ -72,53 +90,49 @@ export default BoardsContainer;
 
 // <div key={index + el}>{el}</div>
 
+// db.collection('collection')
+// .onSnapshot((snapshot) => {
+//     snapshot.docChanges().forEach((change) => {
+//         const payload = {
+//             id: change.doc.id,
+//             data: change.doc.data(),
+//         };
 
+//         ...... some action
+//     });
+// });
 
+// useEffect(() => {
+//   async function fetchBoardsData() {
+//     // const boardsResponse = await db.collection("boards").get();
+//     // const boardsData = boardsResponse.docs.map((board) => board.data());
+//     // setBoards(boardsData);
+//     // console.log(boardsResponse);
 
+//     db.collection("boards")
+//       .orderBy("name")
 
-  // db.collection('collection')
-  // .onSnapshot((snapshot) => {
-  //     snapshot.docChanges().forEach((change) => {
-  //         const payload = {
-  //             id: change.doc.id,
-  //             data: change.doc.data(),
-  //         };
+//       .onSnapshot(function (doc) {
+//         console.log("Current data: ", doc.data());
+//       });
+//   }
+//   fetchBoardsData();
+// }, [fetchBoardData]);
 
-  //         ...... some action
-  //     });
-  // });
+//add if i am missing smth
+//I will edit the same way i watched on youtube
+//oki doki
 
-  // useEffect(() => {
-  //   async function fetchBoardsData() {
-  //     // const boardsResponse = await db.collection("boards").get();
-  //     // const boardsData = boardsResponse.docs.map((board) => board.data());
-  //     // setBoards(boardsData);
-  //     // console.log(boardsResponse);
+// console.log("boards", boards);
 
-  //     db.collection("boards")
-  //       .orderBy("name")
-
-  //       .onSnapshot(function (doc) {
-  //         console.log("Current data: ", doc.data());
-  //       });
-  //   }
-  //   fetchBoardsData();
-  // }, [fetchBoardData]);
-
-  //add if i am missing smth
-  //I will edit the same way i watched on youtube
-  //oki doki
-
-  // console.log("boards", boards);
-
-  //   <Card border="info" style={{ width: '18rem' }}>
-  //   <Card.Header>Header</Card.Header>
-  //   <Card.Body>
-  //     <Card.Title>Info Card Title</Card.Title>
-  //     <Card.Text>
-  //       Some quick example text to build on the card title and make up the bulk
-  //       of the card's content.
-  //     </Card.Text>
-  //   </Card.Body>
-  // </Card>
-  // console.log("boards", boards.id)
+//   <Card border="info" style={{ width: '18rem' }}>
+//   <Card.Header>Header</Card.Header>
+//   <Card.Body>
+//     <Card.Title>Info Card Title</Card.Title>
+//     <Card.Text>
+//       Some quick example text to build on the card title and make up the bulk
+//       of the card's content.
+//     </Card.Text>
+//   </Card.Body>
+// </Card>
+// console.log("boards", boards.id)

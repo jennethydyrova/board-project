@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import db from "../../firebaseConfig";
 
-const ItemForm = ({ boardsItems, boardsId, itemData }) => {
+const ItemForm = ({ boardsItems, boardsId }) => {
   // const [items, setItems] = useState(oneBoard);
   const [items, setItems] = useState(boardsItems);
-  const [userInput, setUserInput] = useState({
-    title: "",
-    id: ""
-  });
+  const [userInput, setUserInput] = useState("");
 
   // const docId = db.collection("boards").doc().id;
 
@@ -20,7 +17,6 @@ const ItemForm = ({ boardsItems, boardsId, itemData }) => {
         items: [...items, userInput],
       });
     setItems([...items, userInput]);
-    itemData((prevState) => prevState + 1);
   };
 
   // useEffect(() => {}, []);
@@ -41,7 +37,7 @@ const ItemForm = ({ boardsItems, boardsId, itemData }) => {
         <input
           name="items"
           onChange={(e) => handleInputValue(e)}
-          value={userInput.title}
+          value={userInput}
         />
         <button>Add Item</button>
       </form>

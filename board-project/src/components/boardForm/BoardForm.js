@@ -3,22 +3,20 @@ import db from "../../firebaseConfig";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-const BoardForm = ({ fetchBoardData }) => {
+const BoardForm = () => {
   const [newBoard, setNewBoard] = useState({
-    title: ""
+    title: "",
   });
 
-  const docId = db.collection("boards").doc().id;
+  // const docId = db.collection("boards").doc.id;
   // console.log("docid", docId);
 
   const addBoard = async () => {
-    console.log(docId)
-    await db.collection("boards").doc(docId).update({
+    await db.collection("boards").add({
       title: newBoard.title,
       items: [],
-      id: docId,
     });
-    fetchBoardData((prevState) => prevState + 1);
+    // fetchBoardData((prevState) => prevState + 1);
   };
   // console.log(docId);
   const handleInputValue = (e) => {
@@ -29,7 +27,7 @@ const BoardForm = ({ fetchBoardData }) => {
     e.preventDefault();
     addBoard();
     setNewBoard({
-      title: ""
+      title: "",
     });
   };
 

@@ -17,7 +17,7 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
   //     </Card.Text>
   //   </Card.Body>
   // </Card>
-  console.log(boardsId);
+  // console.log(boardsId);
 
   return (
     <div>
