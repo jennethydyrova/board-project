@@ -1,33 +1,80 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import db from "../../firebaseConfig";
 import Board from "../../components/board/Board";
 import BoardsForm from "../../components/boardForm/BoardForm";
 
 const BoardsContainer = () => {
   const [boards, setBoards] = useState([
-    {
-      title: "",
-      items: [],
-      id: "random string",
-    },
   ]);
   const [fetchBoardData, setFetchData] = useState(0);
 
   //it console.logs now random string. it means that we don't assign newly generated id to board id
+  //I added something random to see how it behaves, because doc() doesn't accept empty string as an arg
 
   // const docId = db.collection("boards").doc().id;
 
-  // db.collection("cities").doc("SF")
-  // .onSnapshot(function(doc) {
-  //     console.log("Current data: ", doc.data());
-  // });
-
   db.collection("boards")
-    .orderBy("name")
+    .orderBy("title")
     .onSnapshot((snapshot) => {
       let changes = snapshot.docChanges();
-      console.log("Current data: ", changes);
+      setBoards(changes.map((change)=> {
+        return change.doc.data()
+      }))
+      
     });
+
+  //  useEffect(() => {
+  //   async function fetchBoardsData() {
+  //     const boardsResponse = await db.collection("boards").get();
+  //     const boardsData = boardsResponse.docs.map((board) => board.data());
+  //     setBoards(boardsData);
+  //     console.log(boardsResponse);
+  //   }
+  //   fetchBoardsData()
+  // },[])
+
+
+
+  return (
+    <>
+      <div>
+        <BoardsForm fetchBoardData={setFetchData} />
+      </div>
+      <div>
+        {boards.map((el) => {
+          return (
+            <Board
+              key={el.id}
+              boardTitle={el.title}
+              boardsItems={el.items}
+              boardsId={el.id}
+            />
+          );
+        })}
+      </div>
+    </>
+  );
+
+  //   db.collection("cities").doc("SF")
+  //     .onSnapshot(function(doc) {
+  //         console.log("Current data: ", doc.data());
+  //     });
+};
+
+export default BoardsContainer;
+
+/* <h3>{el.title}</h3> */
+
+//           {/* <Board oneBoard={el} /> */}
+//           {/* {el.items.map((item) => {
+//             return <p>{item}</p>;
+//           })} */}
+
+// <div key={index + el}>{el}</div>
+
+
+
+
 
   // db.collection('collection')
   // .onSnapshot((snapshot) => {
@@ -75,39 +122,3 @@ const BoardsContainer = () => {
   //   </Card.Body>
   // </Card>
   // console.log("boards", boards.id)
-  return (
-    <>
-      <div>
-        <BoardsForm fetchBoardData={setFetchData} />
-      </div>
-      <div>
-        {boards.map((el) => {
-          return (
-            <Board
-              key={el.id}
-              boardTitle={el.title}
-              boardsItems={el.items}
-              boardsId={el.id}
-            />
-          );
-        })}
-      </div>
-    </>
-  );
-
-  //   db.collection("cities").doc("SF")
-  //     .onSnapshot(function(doc) {
-  //         console.log("Current data: ", doc.data());
-  //     });
-};
-
-export default BoardsContainer;
-
-/* <h3>{el.title}</h3> */
-
-//           {/* <Board oneBoard={el} /> */}
-//           {/* {el.items.map((item) => {
-//             return <p>{item}</p>;
-//           })} */}
-
-// <div key={index + el}>{el}</div>

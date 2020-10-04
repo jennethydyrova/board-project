@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import db from "../../firebaseConfig";
 
-const ItemForm = ({ boardTitle, boardsItems, boardsId, itemData }) => {
+const ItemForm = ({ boardsItems, boardsId, itemData }) => {
   // const [items, setItems] = useState(oneBoard);
   const [items, setItems] = useState(boardsItems);
-  const [userInput, setUserInput] = useState("");
+  const [userInput, setUserInput] = useState({
+    title: "",
+    id: ""
+  });
 
   // const docId = db.collection("boards").doc().id;
 

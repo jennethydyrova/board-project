@@ -5,13 +5,14 @@ import Button from "react-bootstrap/Button";
 
 const BoardForm = ({ fetchBoardData }) => {
   const [newBoard, setNewBoard] = useState({
-    title: "",
+    title: ""
   });
 
   const docId = db.collection("boards").doc().id;
-  console.log("docid", docId);
+  // console.log("docid", docId);
 
   const addBoard = async () => {
+    console.log(docId)
     await db.collection("boards").doc(docId).update({
       title: newBoard.title,
       items: [],
@@ -28,7 +29,7 @@ const BoardForm = ({ fetchBoardData }) => {
     e.preventDefault();
     addBoard();
     setNewBoard({
-      title: "",
+      title: ""
     });
   };
 
