@@ -60,10 +60,8 @@ const BoardsContainer = () => {
 
   console.log(boards);
   return (
-    <>
-      <div>
+    <div>
         <BoardsForm />
-      </div>
       <div>
         {boards.map((el) => {
           return (
@@ -76,7 +74,7 @@ const BoardsContainer = () => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 
   //   db.collection("cities").doc("SF")
