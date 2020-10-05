@@ -3,14 +3,19 @@ import db from "../../firebaseConfig";
 
 const ItemForm = ({ boardsItems, boardsId }) => {
   // const [items, setItems] = useState(oneBoard);
+
+  const currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() + 1);
+  const defaultDate = currentDate.toISOString().substr(0, 10);
+
   const [items, setItems] = useState(boardsItems);
   const [userInput, setUserInput] = useState({
     title: "",
-    due: "",
+    due: defaultDate,
     assigner: "",
     assignee: "",
     id: "",
-  }); // will be changed to an object instead of ""
+  });
 
   const itemId = db.collection("boards").doc().id;
 
@@ -49,10 +54,10 @@ const ItemForm = ({ boardsItems, boardsId }) => {
     addItem();
     setUserInput({
       title: "",
-      due: "",
-      assigner: "",
-      assignee: "",
       id: "",
+      due: defaultDate,
+      assignee: "",
+      assigner: "",
     });
   };
 
@@ -67,9 +72,9 @@ const ItemForm = ({ boardsItems, boardsId }) => {
         />
         <input
           name="due-date"
+          type="date"
           onChange={(e) => handleDueChange(e)}
           value={userInput.due}
-          placeholder="Due date"
         />
         <input
           name="assigner"
