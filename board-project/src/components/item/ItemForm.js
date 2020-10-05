@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 import db from "../../firebaseConfig";
+import { DatePicker, message } from 'antd';
+import "antd/dist/antd.css";
+import 'moment/locale/zh-cn';
+import moment from "moment";
+import Button from "react-bootstrap/Button";
 
 const ItemForm = ({ boardsItems, boardsId }) => {
   // const [items, setItems] = useState(oneBoard);
@@ -37,8 +42,14 @@ const ItemForm = ({ boardsItems, boardsId }) => {
     setUserInput({ ...userInput, title: e.target.value, id: itemId });
   };
 
-  const handleDueChange = (e) => {
-    setUserInput({ ...userInput, due: e.target.value });
+  // const handleDueChange = (e) => {
+  //   setUserInput({ ...userInput, due: e.target.value });
+  // };
+
+  const handleDueChange = value => {
+    message.info(`Selected Date: ${value ? value.format('YYYY-MM-DD') : 'None'}`);
+    // console.log("asdas",value.toDate().toISOString().substr(0,10))
+    setUserInput({ ...userInput, due: value.toDate().toISOString().substr(0,10) });
   };
 
   const handleAssignerChange = (e) => {
@@ -63,19 +74,16 @@ const ItemForm = ({ boardsItems, boardsId }) => {
 
   return (
     <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form >
         <input
           name="items"
           onChange={(e) => handleInputValue(e)}
           value={userInput.title}
           placeholder="Task title"
         />
-        <input
-          name="due-date"
-          type="date"
-          onChange={(e) => handleDueChange(e)}
-          value={userInput.due}
-        />
+        <DatePicker 
+        onChange={(e) => handleDueChange(e)}
+        defaultValue={moment(defaultDate)}/>
         <input
           name="assigner"
           onChange={(e) => handleAssignerChange(e)}
@@ -88,7 +96,13 @@ const ItemForm = ({ boardsItems, boardsId }) => {
           value={userInput.assignee}
           placeholder="Assignee"
         />
-        <button>Add Item</button>
+        <Button
+        variant="outline-info"
+        type="submit"
+        size="sm"
+        onClick={(e) => handleSubmit(e)}>
+          Add item
+        </Button>
       </form>
     </div>
   );
