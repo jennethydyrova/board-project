@@ -4,6 +4,9 @@ import Items from "../../containers/items/Items";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import db from "../../firebaseConfig";
+import { Container } from "react-bootstrap";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const Board = ({ boardTitle, boardsItems, boardsId }) => {
   const handleClick = (e) => {
@@ -11,7 +14,7 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
     db.collection("boards").doc(boardsId).delete();
   };
   return (
-    <div>
+    <Col>
       <Card border="info" style={{ width: "18rem" }}>
         <Card.Header>{boardTitle}</Card.Header>
         <Card.Body>
@@ -30,7 +33,7 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
           </Button>
         </Card.Body>
       </Card>
-    </div>
+    </Col>
   );
 };
 

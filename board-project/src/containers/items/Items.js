@@ -6,8 +6,6 @@ import ItemForm from "../../components/item/ItemForm";
 const ItemsContainer = ({ boardsItems, boardTitle, boardsId }) => {
   const [items, setItems] = useState([]);
 
-
-
   console.log(boardsItems);
 
   // (boardsItems) => itemsData.push(boardsItems.data().items)
@@ -32,38 +30,3 @@ const ItemsContainer = ({ boardsItems, boardTitle, boardsId }) => {
 };
 
 export default ItemsContainer;
-
-// useEffect(() => {
-//   async function fetchItems() {
-//     const itemsResponse = await db.collection("boards").doc(boardsId).get();
-//     const itemsData = itemsResponse.data();
-//     setItems(itemsData === undefined ? items : itemsData);
-
-//     //   console.log("data", itemsData);
-//     //   console.log("gds", items);
-//   }
-//   fetchItems();
-// }, [followedItems]);
-
-//   console.log("type", items.items[0].id);
-
-
-  // const [followedItems, setFollowedItems] = useState(0);
-
-  // db.collection("boards")
-  //   .onSnapshot((snapshot) => {
-  //     let changes = snapshot.docChanges();
-  //     console.log("current",changes);
-  //   });
-  // useEffect(() => {
-  //   return db.collection("boards").onSnapshot((snapshot) => {
-  //     const itemsData = [];
-
-  //     snapshot.docChanges().forEach((change) => {
-  //       if (change.type === "added") {
-  //         itemsData.push(boardsItems);
-  //       }
-  //     });
-  //     setItems(boardsItems);
-  //   });
-  // }, []);

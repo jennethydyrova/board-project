@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import db from "../../firebaseConfig";
 import Board from "../../components/board/Board";
 import BoardsForm from "../../components/boardForm/BoardForm";
+import { Container } from "react-bootstrap";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const BoardsContainer = () => {
   const [boards, setBoards] = useState([]);
@@ -60,23 +63,27 @@ const BoardsContainer = () => {
 
   console.log(boards);
   return (
-    <>
-      <div>
-        <BoardsForm />
-      </div>
-      <div>
-        {boards.map((el) => {
-          return (
-            <Board
-              key={el.id}
-              boardTitle={el.title}
-              boardsItems={el.items}
-              boardsId={el.id}
-            />
-          );
-        })}
-      </div>
-    </>
+    <div>
+      <Container>
+        <Row>
+          <Col>
+            <BoardsForm />
+          </Col>
+        </Row>
+        <Row>
+          {boards.map((el) => {
+            return (
+              <Board
+                key={el.id}
+                boardTitle={el.title}
+                boardsItems={el.items}
+                boardsId={el.id}
+              />
+            );
+          })}
+        </Row>
+      </Container>
+    </div>
   );
 
   //   db.collection("cities").doc("SF")

@@ -9,7 +9,7 @@ const ItemForm = ({ boardsItems, boardsId }) => {
     due: "",
     assigner: "",
     assignee: "",
-    id: ""
+    id: "",
   }); // will be changed to an object instead of ""
 
   const itemId = db.collection("boards").doc().id;
@@ -28,37 +28,31 @@ const ItemForm = ({ boardsItems, boardsId }) => {
   // useEffect(() => {}, []);
 
   const handleInputValue = (e) => {
-    console.log(userInput)
-    setUserInput({...userInput,
-      title: e.target.value,
-      id: itemId
-    });
+    console.log(userInput);
+    setUserInput({ ...userInput, title: e.target.value, id: itemId });
   };
 
   const handleDueChange = (e) => {
-    setUserInput({...userInput,
-    due: e.target.value
-  })
-  }
+    setUserInput({ ...userInput, due: e.target.value });
+  };
 
   const handleAssignerChange = (e) => {
-    setUserInput({...userInput,
-    assigner: e.target.value
-  })
-  }
+    setUserInput({ ...userInput, assigner: e.target.value });
+  };
 
   const handleAssigneeChange = (e) => {
-    setUserInput({...userInput,
-    assignee: e.target.value
-  })
-  }
+    setUserInput({ ...userInput, assignee: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     addItem();
     setUserInput({
       title: "",
-      id: ""
+      due: "",
+      assigner: "",
+      assignee: "",
+      id: "",
     });
   };
 
@@ -74,7 +68,7 @@ const ItemForm = ({ boardsItems, boardsId }) => {
         <input
           name="due-date"
           onChange={(e) => handleDueChange(e)}
-          value= {userInput.due}
+          value={userInput.due}
           placeholder="Due date"
         />
         <input

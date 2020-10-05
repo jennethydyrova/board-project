@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
+import { NavLink } from "react-router-dom";
 
 import { Menu, Switch } from "antd";
 import {
@@ -49,12 +50,17 @@ const Sider = () => {
         mode="inline"
       >
         <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-          <Menu.Item key="1">Option 1</Menu.Item>
-          <Menu.Item key="2">Option 2</Menu.Item>
-          <Menu.Item key="3">Option 3</Menu.Item>
-          <Menu.Item key="4">Option 4</Menu.Item>
+          <Menu.Item key="1">
+            <NavLink to="/">Home</NavLink>
+          </Menu.Item>
+          <Menu.Item key="2">
+            <NavLink to="/about">About</NavLink>
+          </Menu.Item>
+          <Menu.Item key="3">
+            <NavLink to="/completed">Completed</NavLink>
+          </Menu.Item>
         </SubMenu>
-        <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
+        {/* <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
           <Menu.Item key="5">Option 5</Menu.Item>
           <Menu.Item key="6">Option 6</Menu.Item>
           <SubMenu key="sub3" title="Submenu">
@@ -67,7 +73,7 @@ const Sider = () => {
           <Menu.Item key="10">Option 10</Menu.Item>
           <Menu.Item key="11">Option 11</Menu.Item>
           <Menu.Item key="12">Option 12</Menu.Item>
-        </SubMenu>
+        </SubMenu> */}
       </Menu>
     </>
   );
