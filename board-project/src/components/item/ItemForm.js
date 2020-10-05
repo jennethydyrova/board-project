@@ -4,9 +4,15 @@ import db from "../../firebaseConfig";
 const ItemForm = ({ boardsItems, boardsId }) => {
   // const [items, setItems] = useState(oneBoard);
   const [items, setItems] = useState(boardsItems);
-  const [userInput, setUserInput] = useState("");
+  const [userInput, setUserInput] = useState({
+    title: "",
+    due: "",
+    assigner: "",
+    assignee: "",
+    id: ""
+  }); // will be changed to an object instead of ""
 
-  // const docId = db.collection("boards").doc().id;
+  const itemId = db.collection("boards").doc().id;
 
   const addItem = async () => {
     // console.log(boardsId)
@@ -22,13 +28,38 @@ const ItemForm = ({ boardsItems, boardsId }) => {
   // useEffect(() => {}, []);
 
   const handleInputValue = (e) => {
-    setUserInput(e.target.value);
+    console.log(userInput)
+    setUserInput({...userInput,
+      title: e.target.value,
+      id: itemId
+    });
   };
+
+  const handleDueChange = (e) => {
+    setUserInput({...userInput,
+    due: e.target.value
+  })
+  }
+
+  const handleAssignerChange = (e) => {
+    setUserInput({...userInput,
+    assigner: e.target.value
+  })
+  }
+
+  const handleAssigneeChange = (e) => {
+    setUserInput({...userInput,
+    assignee: e.target.value
+  })
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     addItem();
-    setUserInput("");
+    setUserInput({
+      title: "",
+      id: ""
+    });
   };
 
   return (
@@ -37,7 +68,26 @@ const ItemForm = ({ boardsItems, boardsId }) => {
         <input
           name="items"
           onChange={(e) => handleInputValue(e)}
-          value={userInput}
+          value={userInput.title}
+          placeholder="Task title"
+        />
+        <input
+          name="due-date"
+          onChange={(e) => handleDueChange(e)}
+          value= {userInput.due}
+          placeholder="Due date"
+        />
+        <input
+          name="assigner"
+          onChange={(e) => handleAssignerChange(e)}
+          value={userInput.assigner}
+          placeholder="Assigner"
+        />
+        <input
+          name="assignee"
+          onChange={(e) => handleAssigneeChange(e)}
+          value={userInput.assignee}
+          placeholder="Assignee"
         />
         <button>Add Item</button>
       </form>

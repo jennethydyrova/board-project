@@ -6,25 +6,7 @@ import ItemForm from "../../components/item/ItemForm";
 const ItemsContainer = ({ boardsItems, boardTitle, boardsId }) => {
   const [items, setItems] = useState([]);
 
-  // const [followedItems, setFollowedItems] = useState(0);
 
-  // db.collection("boards")
-  //   .onSnapshot((snapshot) => {
-  //     let changes = snapshot.docChanges();
-  //     console.log("current",changes);
-  //   });
-  // useEffect(() => {
-  //   return db.collection("boards").onSnapshot((snapshot) => {
-  //     const itemsData = [];
-
-  //     snapshot.docChanges().forEach((change) => {
-  //       if (change.type === "added") {
-  //         itemsData.push(boardsItems);
-  //       }
-  //     });
-  //     setItems(boardsItems);
-  //   });
-  // }, []);
 
   console.log(boardsItems);
 
@@ -34,7 +16,7 @@ const ItemsContainer = ({ boardsItems, boardTitle, boardsId }) => {
     <>
       <div>
         {boardsItems.map((item) => {
-          return <Item key={item.id} task={item} />;
+          return <Item key={item.id} task={item.title} />;
         })}
       </div>
       <div>
@@ -64,3 +46,24 @@ export default ItemsContainer;
 // }, [followedItems]);
 
 //   console.log("type", items.items[0].id);
+
+
+  // const [followedItems, setFollowedItems] = useState(0);
+
+  // db.collection("boards")
+  //   .onSnapshot((snapshot) => {
+  //     let changes = snapshot.docChanges();
+  //     console.log("current",changes);
+  //   });
+  // useEffect(() => {
+  //   return db.collection("boards").onSnapshot((snapshot) => {
+  //     const itemsData = [];
+
+  //     snapshot.docChanges().forEach((change) => {
+  //       if (change.type === "added") {
+  //         itemsData.push(boardsItems);
+  //       }
+  //     });
+  //     setItems(boardsItems);
+  //   });
+  // }, []);
