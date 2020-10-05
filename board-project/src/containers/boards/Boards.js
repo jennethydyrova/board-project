@@ -5,36 +5,14 @@ import BoardsForm from "../../components/boardForm/BoardForm";
 
 const BoardsContainer = () => {
   const [boards, setBoards] = useState([]);
-  // const [fetchBoardData, setFetchData] = useState(0);
-
-  //it console.logs now random string. it means that we don't assign newly generated id to board id
-  //I added something random to see how it behaves, because doc() doesn't accept empty string as an arg
-
-  // const docId = db.collection("boards").doc().id;
-
-  // db.collection("boards")
-  //   .orderBy("title")
-  //   .onSnapshot((snapshot) => {
-  //     let changes = snapshot.docChanges();
-  //     setBoards(
-  //       changes.map((change) => {
-  //         return change.doc.data();
-  //       })
-  //     );
-  //   });
 
   useEffect(() => {
-    // const boardsResponse = await db.collection("boards").get();
-    // const boardsData = boardsResponse.docs.map((board) => board.data());
-    // setBoards(boardsData);
-    // console.log(boardsResponse);
     return db.collection("boards").onSnapshot((snapshot) => {
-      const boardData = [];
+      // const boardData = [];
       snapshot.docChanges().forEach(
         // (doc) => boardData.push({ ...doc.data(), id: doc.id })
         (change) => {
           if (change.type === "added") {
-            console.log("added");
             setBoards((prevBoards) => [
               ...prevBoards,
               { ...change.doc.data(), id: change.doc.id },
@@ -44,7 +22,35 @@ const BoardsContainer = () => {
           }
           if (change.type === "modified") {
             console.log(change.doc.data(), change.doc.id);
-            // console.log(boards);
+            setBoards((prevBoards) => {
+              const newArrBoards = [...prevBoards];
+              let index = newArrBoards.findIndex(
+                (el) => el.id === change.doc.id
+              );
+              console.log(index);
+              if (index !== -1) {
+                newArrBoards[index] = {
+                  ...change.doc.data(),
+                  id: change.doc.id,
+                };
+              }
+              return newArrBoards;
+            });
+          }
+          if (change.type === "removed") {
+            setBoards((prevBoards) => {
+              const newArrBoards = [...prevBoards];
+              let index = newArrBoards.findIndex(
+                (el) => el.id === change.doc.id
+              );
+
+              if (index !== -1) {
+                newArrBoards.splice(index, 1);
+
+                console.log(newArrBoards);
+              }
+              return newArrBoards;
+            });
           }
         }
       );
