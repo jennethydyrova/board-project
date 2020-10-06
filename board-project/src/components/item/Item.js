@@ -3,18 +3,26 @@ import "antd/dist/antd.css";
 import {DeleteOutlined} from "@ant-design/icons";
 import {Collapse} from "antd";
 import Button from "react-bootstrap/Button";
+import db from "../../firebaseConfig";
+import * as firebase from "firebase/app";
 
 
 const {Panel} = Collapse;
 
 
-const Item = ({ task }) => {
+const Item = ({ task, boardsId }) => {
   const style = {
     items: {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between"
     }
+  }
+
+  const handleClick= (e) => {
+    db.collection("boards").doc(boardsId).update({
+      items: firebase.firestore.FieldValue.arrayRemove(task)
+    })
   }
   return (
     <div style={style.items}>
@@ -32,7 +40,7 @@ const Item = ({ task }) => {
           </Button>
         </Panel>
       </Collapse>
-      <DeleteOutlined style={{cursor: "pointer"}}/>
+      <DeleteOutlined style={{cursor: "pointer"}} onClick={(e) => handleClick(e)}/>
     </div>
   );
 };

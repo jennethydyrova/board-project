@@ -6,7 +6,7 @@ import ItemForm from "../../components/item/ItemForm";
 const ItemsContainer = ({ boardsItems, boardTitle, boardsId }) => {
   const [items, setItems] = useState([]);
 
-  console.log(boardsItems);
+  console.log("boardsItem",boardsItems);
 
   // (boardsItems) => itemsData.push(boardsItems.data().items)
   // console.log(boardsItems.data().items
@@ -14,7 +14,7 @@ const ItemsContainer = ({ boardsItems, boardTitle, boardsId }) => {
     <>
       <div>
         {boardsItems.map((item) => {
-          return <Item key={item.id} task={item} />;
+          return <Item key={item.id} task={item} boardsId={boardsId} />;
         })}
       </div>
       <div>
