@@ -49,7 +49,9 @@ const ItemForm = ({ boardsItems, boardsId }) => {
   const handleDueChange = value => {
     message.info(`Selected Date: ${value ? value.format('YYYY-MM-DD') : 'None'}`);
     // console.log("asdas",value.toDate().toISOString().substr(0,10))
-    setUserInput({ ...userInput, due: value.toDate().toISOString().substr(0,10) });
+    const dueValue = value !== null? value.toDate().toISOString().substr(0,10): ""
+    console.log("type", dueValue)
+    setUserInput({ ...userInput, due: dueValue });
   };
 
   const handleAssignerChange = (e) => {
