@@ -29,6 +29,7 @@ const ItemForm = ({ boardsItems, boardsId }) => {
   }, [boardsItems]);
 
   const addItem = async () => {
+    // console.log(boardsId)
     await db
       .collection("boards")
       .doc(boardsId)
@@ -38,6 +39,7 @@ const ItemForm = ({ boardsItems, boardsId }) => {
     setItems([...items, userInput]);
   };
   console.log("items", items);
+  // useEffect(() => {}, []);
 
   const handleInputValue = (e) => {
     console.log(userInput);
@@ -48,7 +50,7 @@ const ItemForm = ({ boardsItems, boardsId }) => {
     message.info(
       `Selected Date: ${value ? value.format("YYYY-MM-DD") : "None"}`
     );
-
+    // console.log("asdas",value.toDate().toISOString().substr(0,10))
     setUserInput({
       ...userInput,
       due: value.toDate().toISOString().substr(0, 10),
