@@ -13,6 +13,7 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
     e.preventDefault();
     db.collection("boards").doc(boardsId).delete();
   };
+
   return (
     <Col>
       <Card border="info" style={{ width: "18rem" }}>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import db from "../../firebaseConfig";
-import { DatePicker, message } from 'antd';
+import { DatePicker, message } from "antd";
 import "antd/dist/antd.css";
-import 'moment/locale/zh-cn';
+import "moment/locale/zh-cn";
 import moment from "moment";
 import Button from "react-bootstrap/Button";
 
@@ -24,8 +24,11 @@ const ItemForm = ({ boardsItems, boardsId }) => {
 
   const itemId = db.collection("boards").doc().id;
 
+  useEffect(() => {
+    setItems(boardsItems);
+  }, [boardsItems]);
+
   const addItem = async () => {
-    // console.log(boardsId)
     await db
       .collection("boards")
       .doc(boardsId)
@@ -34,22 +37,22 @@ const ItemForm = ({ boardsItems, boardsId }) => {
       });
     setItems([...items, userInput]);
   };
-
-  // useEffect(() => {}, []);
+  console.log("items", items);
 
   const handleInputValue = (e) => {
     console.log(userInput);
     setUserInput({ ...userInput, title: e.target.value, id: itemId });
   };
 
-  // const handleDueChange = (e) => {
-  //   setUserInput({ ...userInput, due: e.target.value });
-  // };
+  const handleDueChange = (value) => {
+    message.info(
+      `Selected Date: ${value ? value.format("YYYY-MM-DD") : "None"}`
+    );
 
-  const handleDueChange = value => {
-    message.info(`Selected Date: ${value ? value.format('YYYY-MM-DD') : 'None'}`);
-    // console.log("asdas",value.toDate().toISOString().substr(0,10))
-    setUserInput({ ...userInput, due: value.toDate().toISOString().substr(0,10) });
+    setUserInput({
+      ...userInput,
+      due: value.toDate().toISOString().substr(0, 10),
+    });
   };
 
   const handleAssignerChange = (e) => {
@@ -74,16 +77,17 @@ const ItemForm = ({ boardsItems, boardsId }) => {
 
   return (
     <div>
-      <form >
+      <form>
         <input
           name="items"
           onChange={(e) => handleInputValue(e)}
           value={userInput.title}
           placeholder="Task title"
         />
-        <DatePicker 
-        onChange={(e) => handleDueChange(e)}
-        defaultValue={moment(defaultDate)}/>
+        <DatePicker
+          onChange={(e) => handleDueChange(e)}
+          defaultValue={moment(defaultDate)}
+        />
         <input
           name="assigner"
           onChange={(e) => handleAssignerChange(e)}
@@ -97,10 +101,11 @@ const ItemForm = ({ boardsItems, boardsId }) => {
           placeholder="Assignee"
         />
         <Button
-        variant="outline-info"
-        type="submit"
-        size="sm"
-        onClick={(e) => handleSubmit(e)}>
+          variant="outline-info"
+          type="submit"
+          size="sm"
+          onClick={(e) => handleSubmit(e)}
+        >
           Add item
         </Button>
       </form>
