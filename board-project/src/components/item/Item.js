@@ -6,9 +6,15 @@ import Button from "react-bootstrap/Button";
 import db from "../../firebaseConfig";
 import * as firebase from "firebase/app";
 import ItemForm from "./ItemForm";
+import Modal from "react-modal"
+import { DatePicker, message } from "antd";
+import "antd/dist/antd.css";
+import "moment/locale/zh-cn";
+import moment from "moment";
 
 const Item = ({ task, boardsId }) => {
   const { Panel } = Collapse;
+  const [modalOpened, setModalOpened] = useState({modalOpen: false})
   const style = {
     items: {
       display: "flex",
@@ -26,8 +32,14 @@ const Item = ({ task, boardsId }) => {
   };
 
   const handleEdit = () => {
-    return <ItemForm />;
+    console.log(modalOpened)
+    setModalOpened({modalOpen: !modalOpened})
   };
+
+  const handleModal = () => {
+    console.log(modalOpened)
+    setModalOpened({modalOpen: modalOpened.modalOpen ===true? false: true})
+  }
 
   return (
     <div style={style.items}>
@@ -40,16 +52,46 @@ const Item = ({ task, boardsId }) => {
             variant="outline-info"
             type="submit"
             size="sm"
-            onClick={(e) => handleEdit(e)}
+            onClick={(e) => handleModal(e)}
           >
             Edit
           </Button>
+          <Modal isOpen={modalOpened.modalOpen} >
+          <form>
+              <input
+                name="items"
+                value={""}
+                placeholder="Task title"
+              />
+              <DatePicker
+              />
+              <input
+                name="assigner"
+                value={""}
+                placeholder="Assigner"
+              />
+              <input
+                name="assignee"
+                value={""}
+                placeholder="Assignee"
+              />
+              <Button
+                variant="outline-info"
+                type="submit"
+                size="sm"
+              >
+                Edit item
+              </Button>
+            </form>
+            <Button onClick ={(e) => handleModal(e)}>Close form</Button>
+          </Modal>
         </Panel>
       </Collapse>
       <DeleteOutlined
         style={{ cursor: "pointer" }}
         onClick={(e) => handleClick(e)}
       />
+      
     </div>
   );
 };

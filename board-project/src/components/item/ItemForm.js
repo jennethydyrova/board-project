@@ -6,6 +6,7 @@ import "moment/locale/zh-cn";
 import moment from "moment";
 import Button from "react-bootstrap/Button";
 
+
 const ItemForm = ({ boardsItems, boardsId }) => {
   // const [items, setItems] = useState(oneBoard);
 
@@ -21,7 +22,7 @@ const ItemForm = ({ boardsItems, boardsId }) => {
     assignee: "",
     id: "",
   });
-
+  
   const itemId = db.collection("boards").doc().id;
 
   useEffect(() => {
@@ -76,6 +77,8 @@ const ItemForm = ({ boardsItems, boardsId }) => {
       assigner: "",
     });
   };
+
+  
 
   return (
     <div>
