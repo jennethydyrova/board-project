@@ -8,11 +8,12 @@ import * as firebase from "firebase/app";
 import ItemForm from "./ItemForm";
 import Modal from "react-modal";
 import { DatePicker, message } from "antd";
+import { Col, Row, Space} from "antd";
 import "antd/dist/antd.css";
 import "moment/locale/zh-cn";
 import moment from "moment";
 
-const Item = ({ task, boardsId }) => {
+const Item = ({ task, boardsId, boardsItems }) => {
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);
   const defaultDate = currentDate.toISOString().substr(0, 10);
@@ -62,13 +63,16 @@ const Item = ({ task, boardsId }) => {
       due: value.toDate().toISOString().substr(0, 10),
     });
   };
-  console.log(task);
+
   const editItem = async () => {
+    const modifiedItems = boardsItems;
+    const itemIndex = modifiedItems.findIndex((item) => item.id === task.id)
+    modifiedItems[itemIndex] = userInput;
     await db
       .collection("boards")
       .doc(boardsId)
       .update({
-        items: [userInput],
+        items: modifiedItems,
       });
     // setEditedTask([...userInput]);
   };
@@ -78,6 +82,9 @@ const Item = ({ task, boardsId }) => {
     // console.log(modalOpened);
     // setModalOpened({ modalOpen: !modalOpened });
     editItem();
+    setModalOpened({
+      modalOpen: modalOpened.modalOpen === true ? false : true,
+    })
   };
   useEffect(() => {
     setEditedTask(userInput);
@@ -114,40 +121,57 @@ const Item = ({ task, boardsId }) => {
           >
             Edit
           </Button>
-          <Modal isOpen={modalOpened.modalOpen}>
-            <form>
-              <input
-                name="items"
-                value={userInput.title}
-                placeholder="Task title"
-                onChange={(e) => handleInputValue(e)}
-              />
-              <DatePicker
-                onChange={(e) => handleDueChange(e)}
-                defaultValue={moment(defaultDate)}
-              />
-              <input
-                name="assigner"
-                value={userInput.assigner}
-                placeholder="Assigner"
-                onChange={(e) => handleAssignerChange(e)}
-              />
-              <input
-                name="assignee"
-                value={userInput.assignee}
-                placeholder="Assignee"
-                onChange={(e) => handleAssigneeChange(e)}
-              />
-              <Button
-                variant="outline-info"
-                type="submit"
-                size="sm"
-                onClick={(e) => handleEdit(e)}
-              >
-                Edit task
-              </Button>
-            </form>
-            <Button onClick={(e) => handleModal(e)}>Close form</Button>
+          <Modal isOpen={modalOpened.modalOpen} style={modalStyle}>
+            <Space direction="vertical" align="center">
+              <form>
+
+                <Row>  
+                  <input
+                    name="items"
+                    value={userInput.title}
+                    placeholder="Task title"
+                    onChange={(e) => handleInputValue(e)}
+                  />
+                </Row>
+
+                <Row>
+                  <DatePicker
+                    onChange={(e) => handleDueChange(e)}
+                    defaultValue={moment(defaultDate)}
+                  />
+                </Row>
+
+                <Row>
+                  <input
+                    name="assigner"
+                    value={userInput.assigner}
+                    placeholder="Assigner"
+                    onChange={(e) => handleAssignerChange(e)}
+                  />
+                </Row>
+
+                <Row>
+                  <input
+                    name="assignee"
+                    value={userInput.assignee}
+                    placeholder="Assignee"
+                    onChange={(e) => handleAssigneeChange(e)}
+                  />
+                </Row>
+
+                <Row>
+                  <Button
+                    variant="outline-info"
+                    type="submit"
+                    size="sm"
+                    onClick={(e) => handleEdit(e)}>
+                    Edit task
+                  </Button>
+                </Row>
+
+              </form>
+              <Button onClick={(e) => handleModal(e)}>Close form</Button>
+            </Space>
           </Modal>
         </Panel>
       </Collapse>
@@ -160,3 +184,22 @@ const Item = ({ task, boardsId }) => {
 };
 
 export default Item;
+
+
+
+
+
+
+
+
+
+
+
+
+
+const modalStyle ={ 
+  content: {
+    display: "flex",
+    justifyContent: "center"
+  }
+}

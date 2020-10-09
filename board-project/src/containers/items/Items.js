@@ -15,7 +15,8 @@ const ItemsContainer = ({ boardsItems, boardTitle, boardsId }) => {
     <>
       <div>
         {boardsItems.map((item) => {
-          return <Item key={item.id} task={item} boardsId={boardsId} />;
+          return <Item key={item.id} task={item} boardsId={boardsId} 
+          boardsItems={boardsItems}/>;
         })}
       </div>
       <div>
