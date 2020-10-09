@@ -38,7 +38,7 @@ const ItemForm = ({ boardsItems, boardsId }) => {
       });
     setItems([...items, userInput]);
   };
-  console.log("items", items);
+  // console.log("items", items);
   // useEffect(() => {}, []);
 
   const handleInputValue = (e) => {
