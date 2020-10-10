@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import db from "../../firebaseConfig";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
+import "antd/dist/antd.css";
+import {Card, Col, Button} from "antd";
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
-const BoardForm = () => {
+const BoardForm = ({loadingState}) => {
   const [newBoard, setNewBoard] = useState({
     title: "",
   });
@@ -33,29 +36,30 @@ const BoardForm = () => {
 
   return (
     <div>
-      <Form>
-        <Form.Row>
-          <Form.Group controlId="addBoard">
-            <Form.Control
-              type="text"
-              placeholder="Enter board name"
-              name="title"
-              value={newBoard.title}
-              onChange={(e) => handleInputValue(e)}
-            />
-          </Form.Group>
-        </Form.Row>
-        {/* <input></input> */}
-        <Button
-          variant="outline-info"
-          type="submit"
-          size="sm"
-          onClick={(e) => handleSubmit(e)}
-        >
-          Add Board
-        </Button>
-        {/* <button >Add board</button> */}
-      </Form>
+      <Card boarder="info" style={{ width: "18rem", height: "100%" }}>
+        <Form style={{ display:"flex", justifyContent: "center", flexDirection:"column"}}>
+          <Form.Row>
+            <Form.Group controlId="addBoard">
+              <Form.Control
+                type="text"
+                placeholder="Enter board name"
+                name="title"
+                value={newBoard.title}
+                onChange={(e) => handleInputValue(e)}
+              />
+            </Form.Group>
+          </Form.Row>
+          <Button
+            variant="outline-info"
+            type="dashed"
+            size="lg"
+            onClick={(e) => handleSubmit(e)}
+            style={{ width: '60%' }}
+          >
+            <PlusOutlined /> Add board
+          </Button>
+        </Form>
+      </Card>
     </div>
   );
 };
