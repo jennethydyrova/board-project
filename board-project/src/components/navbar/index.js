@@ -5,12 +5,13 @@ import { NavLink } from "react-router-dom";
 
 import { Menu, Switch } from "antd";
 import {
-  MailOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
+  HomeOutlined,
+  ThunderboltOutlined,
+  QuestionCircleOutlined,
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
+// const [collapsed, setCollapsed] = useState(true);
 
 const Sider = () => {
   const [theme, setTheme] = useState({
@@ -43,23 +44,23 @@ const Sider = () => {
       <br />
       <Menu
         theme={theme.theme}
-        onClick={(e) => handleClick(e)}
-        style={{ width: 256 }}
+        // onClick={(e) => handleClick(e)}
+        style={{ width: "100%" }}
         defaultOpenKeys={["sub1"]}
         selectedKeys={[theme.current]}
         mode="inline"
       >
-        <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-          <Menu.Item key="1">
-            <NavLink to="/">Home</NavLink>
-          </Menu.Item>
-          <Menu.Item key="2">
-            <NavLink to="/about">About</NavLink>
-          </Menu.Item>
-          <Menu.Item key="3">
-            <NavLink to="/completed">Completed</NavLink>
-          </Menu.Item>
-        </SubMenu>
+        {/* <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One"> */}
+        <Menu.Item key="1" icon={<HomeOutlined />}>
+          <NavLink to="/">Home</NavLink>
+        </Menu.Item>
+        <Menu.Item key="2" icon={<QuestionCircleOutlined />}>
+          <NavLink to="/about">About</NavLink>
+        </Menu.Item>
+        <Menu.Item key="3" icon={<ThunderboltOutlined />}>
+          <NavLink to="/completed">Completed</NavLink>
+        </Menu.Item>
+        {/* </SubMenu> */}
         {/* <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
           <Menu.Item key="5">Option 5</Menu.Item>
           <Menu.Item key="6">Option 6</Menu.Item>
