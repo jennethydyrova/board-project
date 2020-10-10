@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import ItemForm from "../item/ItemForm";
 import Items from "../../containers/items/Items";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+// import Card from "react-bootstrap/Card";
+// import Button from "react-bootstrap/Button";
 import db from "../../firebaseConfig";
-import { Container } from "react-bootstrap";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+// import { Container } from "react-bootstrap";
+// import Row from "react-bootstrap/Row";
+// import Col from "react-bootstrap/Col";
+import { Card, Col, Row, Button } from 'antd';
 
 const Board = ({ boardTitle, boardsItems, boardsId }) => {
   const handleClick = (e) => {
@@ -15,27 +16,39 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
   };
 
   return (
-    <Col>
-      <Card border="info" style={{ width: "18rem" }}>
-        <Card.Header>{boardTitle}</Card.Header>
-        <Card.Body>
-          <Items
+    // <div className="site-card-wrapper">
+    <Row gutter={16}>
+      <Col span={8}>
+        <Card title="Card title" bordered={false}>
+        <Items
             boardTitle={boardTitle}
             boardsId={boardsId}
             boardsItems={boardsItems}
           />
-          <Button
-            variant="outline-info"
+          <Button variant="outline-info"
             type="submit"
             size="sm"
-            onClick={(e) => handleClick(e)}
-          >
-            Delete Board
+            onClick={(e) => handleClick(e)}>
+            Delete Button
           </Button>
-        </Card.Body>
-      </Card>
-    </Col>
-  );
+        </Card>
+      </Col>
+    </Row>
+  // </div>,
+  )
 };
 
 export default Board;
+   
+
+        // <Card.Header></Card.Header>
+   
+     
+          // <Button
+          //   variant="outline-info"
+          //   type="submit"
+          //   size="sm"
+          //   onClick={(e) => handleClick(e)}
+          // >
+          //   Delete Board
+          // </Button>
