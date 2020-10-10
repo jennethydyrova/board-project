@@ -5,10 +5,9 @@ import { Collapse } from "antd";
 import Button from "react-bootstrap/Button";
 import db from "../../firebaseConfig";
 import * as firebase from "firebase/app";
-import ItemForm from "./ItemForm";
 import Modal from "react-modal";
 import { DatePicker, message } from "antd";
-import { Col, Row, Space} from "antd";
+import { Col, Row, Space } from "antd";
 import "antd/dist/antd.css";
 import "moment/locale/zh-cn";
 import moment from "moment";
@@ -66,14 +65,11 @@ const Item = ({ task, boardsId, boardsItems }) => {
 
   const editItem = async () => {
     const modifiedItems = boardsItems;
-    const itemIndex = modifiedItems.findIndex((item) => item.id === task.id)
+    const itemIndex = modifiedItems.findIndex((item) => item.id === task.id);
     modifiedItems[itemIndex] = userInput;
-    await db
-      .collection("boards")
-      .doc(boardsId)
-      .update({
-        items: modifiedItems,
-      });
+    await db.collection("boards").doc(boardsId).update({
+      items: modifiedItems,
+    });
     // setEditedTask([...userInput]);
   };
   console.log(editedTask);
@@ -84,7 +80,7 @@ const Item = ({ task, boardsId, boardsItems }) => {
     editItem();
     setModalOpened({
       modalOpen: modalOpened.modalOpen === true ? false : true,
-    })
+    });
   };
   useEffect(() => {
     setEditedTask(userInput);
@@ -124,8 +120,7 @@ const Item = ({ task, boardsId, boardsItems }) => {
           <Modal isOpen={modalOpened.modalOpen} style={modalStyle}>
             <Space direction="vertical" align="center">
               <form>
-
-                <Row>  
+                <Row>
                   <input
                     name="items"
                     value={userInput.title}
@@ -164,11 +159,11 @@ const Item = ({ task, boardsId, boardsItems }) => {
                     variant="outline-info"
                     type="submit"
                     size="sm"
-                    onClick={(e) => handleEdit(e)}>
+                    onClick={(e) => handleEdit(e)}
+                  >
                     Edit task
                   </Button>
                 </Row>
-
               </form>
               <Button onClick={(e) => handleModal(e)}>Close form</Button>
             </Space>
@@ -185,21 +180,11 @@ const Item = ({ task, boardsId, boardsItems }) => {
 
 export default Item;
 
-
-
-
-
-
-
-
-
-
-
-
-
-const modalStyle ={ 
+const modalStyle = {
   content: {
     display: "flex",
-    justifyContent: "center"
-  }
-}
+    justifyContent: "center",
+    width: "500px",
+    height: "300px",
+  },
+};
