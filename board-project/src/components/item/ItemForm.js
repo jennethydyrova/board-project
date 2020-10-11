@@ -20,6 +20,7 @@ const ItemForm = ({ boardsItems, boardsId }) => {
     assigner: "",
     assignee: "",
     id: "",
+    completed: false,
   });
 
   const itemId = db.collection("boards").doc().id;

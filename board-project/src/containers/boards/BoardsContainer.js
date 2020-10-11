@@ -75,6 +75,11 @@ const BoardsContainer = () => {
         break
     }
   }, [sortedBy])
+  // const noData = () => {
+  //   if (boards.length === 0) {
+  //     setIsLoading(null)
+  //   }
+  // }
 
   return (
     <div>
