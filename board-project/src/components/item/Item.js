@@ -7,7 +7,7 @@ import db from "../../firebaseConfig";
 import * as firebase from "firebase/app";
 import Modal from "react-modal";
 import { DatePicker, message } from "antd";
-import { Col, Row, Space } from "antd";
+import { Col, Row, Space, Checkbox } from "antd";
 import "antd/dist/antd.css";
 import "moment/locale/zh-cn";
 import moment from "moment";
@@ -102,6 +102,10 @@ const Item = ({ task, boardsId, boardsItems }) => {
     setUserInput({ ...userInput, assignee: e.target.value });
   };
 
+  // const handleCheckboxChange = () => {
+  //   style
+  // }
+
   return (
     <div style={style.items}>
       <Collapse style={{ width: "100%" }} defaultActiveKey={["1"]}>
@@ -124,6 +128,7 @@ const Item = ({ task, boardsId, boardsItems }) => {
                   <input
                     name="items"
                     value={userInput.title}
+                    className="task-title"
                     placeholder="Task title"
                     onChange={(e) => handleInputValue(e)}
                   />
@@ -174,6 +179,7 @@ const Item = ({ task, boardsId, boardsItems }) => {
         style={{ cursor: "pointer" }}
         onClick={(e) => handleClick(e)}
       />
+      <Checkbox  ></Checkbox>
     </div>
   );
 };

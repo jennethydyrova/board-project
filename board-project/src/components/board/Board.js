@@ -29,7 +29,7 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
             type="submit"
             size="sm"
             onClick={(e) => handleClick(e)}>
-            Delete Button
+            Delete Board
           </Button>
         </Card>
       </Col>
