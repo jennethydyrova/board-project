@@ -58,20 +58,20 @@ const BoardsContainer = () => {
     });
   }, []);
 
-  const noData = () => {
-    if (boards.length === 0) {
-      setIsLoading(null)
-    }
-  }
+  // const noData = () => {
+  //   if (boards.length === 0) {
+  //     setIsLoading(null)
+  //   }
+  // }
 
   const {Meta} = Card
   return (
     <div>
       <Container>
         <Row style={{display:"flex", justifyContent: "center"}}>
-          {isLoading? <Loading />: null}
+          {/* {isLoading? <Loading />: null}
           {setTimeout(noData, 4000)}
-          {isLoading === null? <h3 >No data to display</h3>: null}
+          {isLoading === null? <h3 >No data to display</h3>: null} */}
         </Row>
         <Row>
           {boards.map((el) => {
@@ -85,7 +85,7 @@ const BoardsContainer = () => {
             );
           })}
           <Col>
-            {!isLoading? <BoardsForm />: null}
+           <BoardsForm />
           </Col>
         </Row>
           

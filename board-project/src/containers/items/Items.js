@@ -4,19 +4,15 @@ import Item from "../../components/item/Item";
 import ItemForm from "../../components/item/ItemForm";
 
 const ItemsContainer = ({ boardsItems, boardTitle, boardsId }) => {
-  // const [items, setItems] = useState([]);
+  const [items, setItems] = useState([]);
 
-  console.log("boardsItem", boardsItems);
 
-  // (boardsItems) => itemsData.push(boardsItems.data().items)
-  // console.log(boardsItems.data().items
-  console.log(boardsItems);
   return (
     <>
       <div>
         {boardsItems.map((item) => {
           return <Item key={item.id} task={item} boardsId={boardsId} 
-          boardsItems={boardsItems}/>;
+          boardsItems={boardsItems} setItems={setItems}/>;
         })}
       </div>
       <div>
