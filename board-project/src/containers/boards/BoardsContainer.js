@@ -5,14 +5,14 @@ import BoardsForm from "../../components/boardForm/BoardForm";
 import { Container } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import "antd/dist/antd.css";
+import {Card} from "antd"
+import Loading from "../../components/board/Loading"
 
 const BoardsContainer = () => {
-  const [boards, setBoards] = useState([
-    // {
-    //   title: "",
-    //   items: [],
-    // },
-  ]);
+  const [boards, setBoards] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     return db.collection("boards").onSnapshot((snapshot) => {
@@ -22,6 +22,7 @@ const BoardsContainer = () => {
             ...prevBoards,
             { ...change.doc.data(), id: change.doc.id },
           ]);
+          setIsLoading(false)
         }
         if (change.type === "modified") {
           console.log(change.doc.data(), change.doc.id);
@@ -37,6 +38,7 @@ const BoardsContainer = () => {
             }
             return newArrBoards;
           });
+          setIsLoading(false)
         }
         if (change.type === "removed") {
           setBoards((prevBoards) => {
@@ -50,19 +52,26 @@ const BoardsContainer = () => {
             }
             return newArrBoards;
           });
+          setIsLoading(false)
         }
       });
     });
   }, []);
 
-  console.log(boards);
+  const noData = () => {
+    if (boards.length === 0) {
+      setIsLoading(null)
+    }
+  }
+
+  const {Meta} = Card
   return (
     <div>
       <Container>
-        <Row>
-          <Col>
-            <BoardsForm />
-          </Col>
+        <Row style={{display:"flex", justifyContent: "center"}}>
+          {isLoading? <Loading />: null}
+          {setTimeout(noData, 4000)}
+          {isLoading === null? <h3 >No data to display</h3>: null}
         </Row>
         <Row>
           {boards.map((el) => {
@@ -75,7 +84,11 @@ const BoardsContainer = () => {
               />
             );
           })}
+          <Col>
+            {!isLoading? <BoardsForm />: null}
+          </Col>
         </Row>
+          
       </Container>
     </div>
   );
