@@ -4,9 +4,13 @@ import Form from "react-bootstrap/Form";
 // import Button from "react-bootstrap/Button";
 import "antd/dist/antd.css";
 import {Card, Col, Button} from "antd";
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { DownOutlined,PlusOutlined } from '@ant-design/icons';
+import { Menu, Dropdown, message, Tooltip } from 'antd';
+import SortBy from "./SortBy"
 
-const BoardForm = ({loadingState}) => {
+
+
+const BoardForm = ({sortBoards}) => {
   const [newBoard, setNewBoard] = useState({
     title: "",
   });
@@ -15,9 +19,12 @@ const BoardForm = ({loadingState}) => {
   // console.log("docid", docId);
 
   const addBoard = async () => {
+    const date = new Date()
+    const stringDate = date.toISOString()
     await db.collection("boards").add({
       title: newBoard.title,
       items: [],
+      date: stringDate
     });
     // fetchBoardData((prevState) => prevState + 1);
   };
@@ -36,6 +43,7 @@ const BoardForm = ({loadingState}) => {
 
   return (
     <div>
+      <SortBy sortBoards= {sortBoards}/>
       <Card boarder="info" style={{ width: "18rem", height: "100%" }}>
         <Form style={{ display:"flex", justifyContent: "center", flexDirection:"column"}}>
           <Form.Row>

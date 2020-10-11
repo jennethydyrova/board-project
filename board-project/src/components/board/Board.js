@@ -19,7 +19,7 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
     // <div className="site-card-wrapper">
     <Row gutter={16}>
       <Col span={8}>
-        <Card title="Card title" bordered={false}>
+        <Card title={boardTitle} bordered={false}>
         <Items
             boardTitle={boardTitle}
             boardsId={boardsId}

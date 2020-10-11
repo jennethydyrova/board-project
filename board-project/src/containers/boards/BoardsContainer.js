@@ -8,14 +8,18 @@ import Col from "react-bootstrap/Col";
 import "antd/dist/antd.css";
 import {Card} from "antd"
 import Loading from "../../components/board/Loading"
+import {byTitle, byTitleD, byDate, byDateD} from "../../functions"
 
 const BoardsContainer = () => {
   const [boards, setBoards] = useState([]);
-
   const [isLoading, setIsLoading] = useState(true)
+  const [sortedBy, setSortedBy] = useState("title")
 
   useEffect(() => {
-    return db.collection("boards").onSnapshot((snapshot) => {
+    return db.collection("boards").orderBy(sortedBy).onSnapshot((snapshot) => {
+      if (snapshot.docChanges().length === 0){
+        setIsLoading(false)
+      }
       snapshot.docChanges().forEach((change) => {
         if (change.type === "added") {
           setBoards((prevBoards) => [
@@ -25,11 +29,9 @@ const BoardsContainer = () => {
           setIsLoading(false)
         }
         if (change.type === "modified") {
-          console.log(change.doc.data(), change.doc.id);
           setBoards((prevBoards) => {
             const newArrBoards = [...prevBoards];
             let index = newArrBoards.findIndex((el) => el.id === change.doc.id);
-            console.log(index);
             if (index !== -1) {
               newArrBoards[index] = {
                 ...change.doc.data(),
@@ -47,31 +49,39 @@ const BoardsContainer = () => {
 
             if (index !== -1) {
               newArrBoards.splice(index, 1);
-
-              console.log(newArrBoards);
             }
             return newArrBoards;
           });
-          setIsLoading(false)
+          
         }
       });
     });
   }, []);
 
-  const noData = () => {
-    if (boards.length === 0) {
-      setIsLoading(null)
-    }
-  }
+  useEffect(() => {
 
-  const {Meta} = Card
+    switch(sortedBy){
+      case "title":
+        setBoards(boards.sort(byTitle))
+        break
+      case "dTitle":
+          setBoards(boards.sort(byTitleD))
+          break
+      case "date":
+        setBoards(boards.sort(byDate))
+        break
+      case "dDate":
+        setBoards(boards.sort(byDateD))
+        break
+    }
+  }, [sortedBy])
+
   return (
     <div>
       <Container>
         <Row style={{display:"flex", justifyContent: "center"}}>
           {isLoading? <Loading />: null}
-          {setTimeout(noData, 4000)}
-          {isLoading === null? <h3 >No data to display</h3>: null}
+          {/* {setTimeout(noData, 4000)} */}
         </Row>
         <Row>
           {boards.map((el) => {
@@ -85,7 +95,7 @@ const BoardsContainer = () => {
             );
           })}
           <Col>
-            {!isLoading? <BoardsForm />: null}
+            {!isLoading? <BoardsForm sortBoards={setSortedBy}/>: null}
           </Col>
         </Row>
           
@@ -95,3 +105,46 @@ const BoardsContainer = () => {
 };
 
 export default BoardsContainer;
+
+
+
+
+// function byTitle( a, b ) {
+//   if ( a.title < b.title ){
+//     return -1;
+//   }
+//   if ( a.title > b.title){
+//     return 1;
+//   }
+//   return 0;
+// }
+
+// function byTitleD( a, b ) {
+//   if ( a.title < b.title ){
+//     return 1;
+//   }
+//   if ( a.title > b.title){
+//     return -1;
+//   }
+//   return 0;
+// }
+
+// function byDate( a, b ) {
+//   if ( a.date < b.date ){
+//     return -1;
+//   }
+//   if ( a.date > b.date){
+//     return 1;
+//   }
+//   return 0;
+// }
+
+// function byDateD( a, b ) {
+//   if ( a.date < b.date ){
+//     return 1;
+//   }
+//   if ( a.date > b.date){
+//     return -1;
+//   }
+//   return 0;
+// }

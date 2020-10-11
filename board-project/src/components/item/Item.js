@@ -12,6 +12,7 @@ import "antd/dist/antd.css";
 import "moment/locale/zh-cn";
 import moment from "moment";
 
+
 const Item = ({ task, boardsId, boardsItems }) => {
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);
@@ -72,7 +73,6 @@ const Item = ({ task, boardsId, boardsItems }) => {
     });
     // setEditedTask([...userInput]);
   };
-  console.log(editedTask);
   const handleEdit = (e) => {
     e.preventDefault();
     // console.log(modalOpened);
@@ -87,14 +87,12 @@ const Item = ({ task, boardsId, boardsItems }) => {
   }, [userInput]);
 
   const handleModal = () => {
-    console.log(modalOpened);
     setModalOpened({
       modalOpen: modalOpened.modalOpen === true ? false : true,
     });
   };
 
   const handleAssignerChange = (e) => {
-    console.log(userInput);
     setUserInput({ ...userInput, assigner: e.target.value });
   };
 
