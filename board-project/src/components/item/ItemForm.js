@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import db from "../../firebaseConfig";
-import { DatePicker, message } from "antd";
+import { DatePicker, message, Button } from "antd";
 import "antd/dist/antd.css";
 import "moment/locale/zh-cn";
 import moment from "moment";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 
 const ItemForm = ({ boardsItems, boardsId }) => {
   // const [items, setItems] = useState(oneBoard);
@@ -75,6 +75,7 @@ const ItemForm = ({ boardsItems, boardsId }) => {
       due: defaultDate,
       assignee: "",
       assigner: "",
+      completed: false
     });
   };
 

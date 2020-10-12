@@ -2,20 +2,22 @@ import React, { useState, useEffect } from "react";
 import "antd/dist/antd.css";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Collapse } from "antd";
-import Button from "react-bootstrap/Button";
 import db from "../../firebaseConfig";
 import * as firebase from "firebase/app";
 import Modal from "react-modal";
 import { DatePicker, message } from "antd";
-import { Row, Space, Checkbox } from "antd";
+import { Row, Space, Checkbox, Button } from "antd";
 import "antd/dist/antd.css";
 import "moment/locale/zh-cn";
 import moment from "moment";
+
 
 const Item = ({ task, boardsId, boardsItems, setItems }) => {
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);
   const defaultDate = currentDate.toISOString().substr(0, 10);
+
+  const [showResults, setShowResults] = React.useState(true)
 
   const [userInput, setUserInput] = useState({
     title: task.title,
@@ -49,6 +51,7 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
     },
   };
   
+  console.log(task)
 
   const handleClick = (e) => {
     db.collection("boards")
@@ -67,7 +70,6 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
     message.info(
       `Selected Date: ${value ? value.format("YYYY-MM-DD") : "None"}`
     );
-    
     setUserInput({
       ...userInput,
       due: value.toDate().toISOString().substr(0, 10),
@@ -115,6 +117,7 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
 const completeHandler = (e) => {
 e.preventDefault()
 completeStatus()
+setShowResults(false)
 }
 
 const completeStatus = async() => {
@@ -126,7 +129,7 @@ const completeStatus = async() => {
   });
 
 }
-console.log(task.completed)
+
 
 
   return (
@@ -202,7 +205,7 @@ console.log(task.completed)
         style={{ cursor: "pointer" }}
         onClick={(e) => handleClick(e)}
       />
-      <Checkbox onClick={e => completeHandler(e)} checked={task.completed === false ? false : true}></Checkbox>
+      <Checkbox onClick={e => completeHandler(e)} checked={task.completed === true ? true : false}></Checkbox>
     </div>
   );
 };

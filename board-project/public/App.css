@@ -1,3 +1,4 @@
-.crossed-line {
-  text-decoration: line-through;
+.site-card-border-less-wrapper {
+  padding: 30px;
+  background: #ececec;
 }
