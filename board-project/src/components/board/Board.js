@@ -20,10 +20,7 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
     <Row gutter={16}>
       <Col span={8}>
         <Card title={boardTitle} bordered={false}>
-<<<<<<< HEAD
-=======
           
->>>>>>> 18b877f7221051d03168399b1100761a3ef46def
         <Items
             boardTitle={boardTitle}
             boardsId={boardsId}
