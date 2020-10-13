@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "antd/dist/antd.css";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Collapse } from "antd";
+
 import db from "../../firebaseConfig";
 import * as firebase from "firebase/app";
 import Modal from "react-modal";
@@ -158,16 +159,16 @@ const completeStatus = async() => {
                     placeholder="Task title"
                     onChange={(e) => handleInputValue(e)}
                   />
-                </Row>
+                {/* </Row>
 
-                <Row>
+                <Row> */}
                   <DatePicker
                     onChange={(e) => handleDueChange(e)}
                     defaultValue={moment(defaultDate)}
                   />
-                </Row>
+                {/* </Row>
 
-                <Row>
+                <Row> */}
                   <input
                     name="assigner"
                     value={userInput.assigner}

@@ -73,6 +73,8 @@ const BoardsContainer = () => {
       case "dDate":
         setBoards(boards.sort(byDateD))
         break
+      default:
+        setBoards(boards.sort(byDateD))
     }
   }, [sortedBy])
   // const noData = () => {
@@ -83,28 +85,34 @@ const BoardsContainer = () => {
 
   return (
     <div>
-      <Container>
+      {/* <Container>
         <Row style={{display:"flex", justifyContent: "center"}}>
           {isLoading? <Loading />: null}
           {/* {setTimeout(noData, 4000)} */}
-        </Row>
+        {/* </Row> */} 
+
+        <BoardsForm sortBoards={setSortedBy}/>
+    
         <Row>
           {boards.map((el) => {
             return (
-              <Board
-                key={el.id}
-                boardTitle={el.title}
-                boardsItems={el.items ? el.items : []}
-                boardsId={el.id}
-              />
+              <Card.Grid>
+                <Board
+                  key={el.id}
+                  boardTitle={el.title}
+                  boardsItems={el.items ? el.items : []}
+                  boardsId={el.id}
+                />
+               </Card.Grid>
             );
           })}
-          <Col>
+          </Row>
+          {/* <Col>
             {!isLoading? <BoardsForm sortBoards={setSortedBy}/>: null}
           </Col>
-        </Row>
+        
           
-      </Container>
+      </Container> */}
     </div>
   );
 };
