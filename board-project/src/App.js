@@ -11,6 +11,7 @@ import { Row, Col, Layout, Menu } from "antd";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import About from "./components/about/index";
 import CompletedTasks from "./components/completed/index";
+import BoardForm from "./components/boardForm/BoardForm"
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -22,7 +23,7 @@ function App() {
           <Sidebar />
         </Sider>
         <Layout>
-          <Header style={{ backgroundColor: "#f0f2ff" }}> Header</Header>
+          <Header style={{ backgroundColor: "#f0f2ff" }}>Header</Header>
           <Content>
             {" "}
             <Route exact path="/" component={BoardsContainer} />

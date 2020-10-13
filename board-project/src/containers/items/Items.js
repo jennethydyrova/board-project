@@ -24,6 +24,9 @@ const ItemsContainer = ({ boardsItems, boardTitle, boardsId }) => {
           break
       case "dDue":
           setItems(items.sort(byDeadlineD))
+          break
+      default: setItems(items.sort(byTitle))
+
     }
   }, [sortedBy])
 
@@ -32,11 +35,14 @@ const ItemsContainer = ({ boardsItems, boardTitle, boardsId }) => {
     setItems(boardsItems)
   },[boardsItems])
 
+  const notCompletedItems = items.filter((item) => item.completed === false)
+ 
   return (
     <>
       <SortItemsBy sortItems={setSortedBy} />
       <div>
-        {items.map((item) => {
+       
+        {notCompletedItems.map((item) => {
           return <Item key={item.id} task={item} boardsId={boardsId} 
           boardsItems={boardsItems} setItems={setItems}/>;
         })}

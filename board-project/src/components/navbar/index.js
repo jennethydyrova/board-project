@@ -20,14 +20,14 @@ const Sider = () => {
   });
 
   const changeTheme = (value) => {
-    setTheme({
+    setTheme({...theme,
       theme: value ? "dark" : "light",
     });
   };
 
   const handleClick = (e) => {
     console.log("click ", e);
-    setTheme({
+    setTheme({...theme,
       current: e.key,
     });
   };
@@ -36,7 +36,7 @@ const Sider = () => {
     <>
       <Switch
         checked={theme.theme === "dark"}
-        onChange={(e) => changeTheme(e)}
+        onClick={(e) => changeTheme(e)}
         checkedChildren="Dark"
         unCheckedChildren="Light"
       />
@@ -51,13 +51,13 @@ const Sider = () => {
         mode="inline"
       >
         {/* <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One"> */}
-        <Menu.Item key="1" icon={<HomeOutlined />}>
+        <Menu.Item key="1" icon={<HomeOutlined />} onClick= {(e) => handleClick(e)}>
           <NavLink to="/">Home</NavLink>
         </Menu.Item>
-        <Menu.Item key="2" icon={<QuestionCircleOutlined />}>
+        <Menu.Item key="2" icon={<QuestionCircleOutlined />} onClick= {(e) => handleClick(e)}>
           <NavLink to="/about">About</NavLink>
         </Menu.Item>
-        <Menu.Item key="3" icon={<ThunderboltOutlined />}>
+        <Menu.Item key="3" icon={<ThunderboltOutlined />} onClick= {(e) => handleClick(e)}>
           <NavLink to="/completed">Completed</NavLink>
         </Menu.Item>
         {/* </SubMenu> */}

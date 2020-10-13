@@ -43,9 +43,9 @@ const BoardForm = ({sortBoards}) => {
 
   return (
     <div>
-      <SortBy sortBoards= {sortBoards}/>
+      
       <Card boarder="info" style={{ width: "18rem", height: "100%" }}>
-        <Form style={{ display:"flex", justifyContent: "center", flexDirection:"column"}}>
+        <Form onSubmit={(e) => handleSubmit(e)} style={{ display:"flex", justifyContent: "center", flexDirection:"column"}}>
           <Form.Row>
             <Form.Group controlId="addBoard">
               <Form.Control
@@ -59,7 +59,7 @@ const BoardForm = ({sortBoards}) => {
           </Form.Row>
           <Button
             variant="outline-info"
-            type="dashed"
+            type="submit"
             size="lg"
             onClick={(e) => handleSubmit(e)}
             style={{ width: '60%' }}
@@ -68,6 +68,7 @@ const BoardForm = ({sortBoards}) => {
           </Button>
         </Form>
       </Card>
+      <SortBy sortBoards= {sortBoards}/>
     </div>
   );
 };
