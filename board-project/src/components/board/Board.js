@@ -7,10 +7,7 @@ import db from "../../firebaseConfig";
 // import { Container } from "react-bootstrap";
 // import Row from "react-bootstrap/Row";
 // import Col from "react-bootstrap/Col";
-import { Card, Button } from 'antd';
-import { BgColorsOutlined } from "@ant-design/icons";
-// import './site-card-border-less-wrapper.css'
-
+import { Card, Col, Row, Button } from 'antd';
 
 const Board = ({ boardTitle, boardsItems, boardsId }) => {
   const handleClick = (e) => {
@@ -18,16 +15,10 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
     db.collection("boards").doc(boardsId).delete();
   };
 
-  const gridStyle = {
-    width: '25%',
-    // textAlign: 'center',
-    margin: '10px'
-    
-  };
-
   return (
     // <div className="site-card-wrapper">
-        <Card.Grid className='site-card-border-less-wrapper' title={boardTitle} style={gridStyle} bordered={true} >
+
+        <Card title={boardTitle} bordered={false}>
           
         <Items
             boardTitle={boardTitle}
@@ -40,8 +31,8 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
             onClick={(e) => handleClick(e)}>
             Delete Board
           </Button>
-        </Card.Grid>
-
+        </Card>
+ 
   // </div>,
   )
 };
