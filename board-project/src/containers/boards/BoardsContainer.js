@@ -7,16 +7,57 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "antd/dist/antd.css";
 import {Card} from "antd"
-import Loading from "../../components/board/Loading"
+// import Loading from "../../components/board/Loading"
 import {byTitle, byTitleD, byDate, byDateD} from "../../functions"
+import SortBy from '../../components/sortBy/SortBy'
 
 const BoardsContainer = () => {
   const [boards, setBoards] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
-  const [sortedBy, setSortedBy] = useState("title")
+  const [sortedBy, setSortedBy] = useState("")
+
+
+  const sortBoards = (sortedBy) => {
+    switch(sortedBy){
+      case "title":
+        setBoards((prevBoards) => {
+          const newBoards = [...prevBoards];
+          let newBoard = newBoards.sort(byTitle)
+          return newBoard
+        })
+          break
+      case "dTitle":
+        setBoards((prevBoards) => {
+          const newBoards = [...prevBoards];
+          let newBoard = newBoards.sort(byTitleD)
+          return newBoard
+        })
+          break
+      case "date":
+        setBoards((prevBoards) => {
+          const newBoards = [...prevBoards];
+          let newBoard = newBoards.sort(byDate)
+          return newBoard
+        })
+          break
+      case "dDate":
+        setBoards((prevBoards) => {
+          const newBoards = [...prevBoards];
+          let newBoard = newBoards.sort(byDateD)
+          return newBoard
+        })
+          break
+      default:
+        setBoards((prevBoards) => {
+          const newBoards = [...prevBoards];
+          let newBoard = newBoards.sort(byTitle)
+          return newBoard
+        })
+    }
+  }
 
   useEffect(() => {
-    return db.collection("boards").orderBy(sortedBy).onSnapshot((snapshot) => {
+    return db.collection("boards").onSnapshot((snapshot) => {
       if (snapshot.docChanges().length === 0){
         setIsLoading(false)
       }
@@ -58,30 +99,18 @@ const BoardsContainer = () => {
     });
   }, []);
 
-  useEffect(() => {
 
-    switch(sortedBy){
-      case "title":
-        setBoards(boards.sort(byTitle))
-        break
-      case "dTitle":
-          setBoards(boards.sort(byTitleD))
-          break
-      case "date":
-        setBoards(boards.sort(byDate))
-        break
-      case "dDate":
-        setBoards(boards.sort(byDateD))
-        break
-      default:
-        setBoards(boards.sort(byDateD))
-    }
-  }, [sortedBy])
+    
+
   // const noData = () => {
   //   if (boards.length === 0) {
   //     setIsLoading(null)
   //   }
   // }
+
+
+
+
 
   return (
     <div>
@@ -91,8 +120,8 @@ const BoardsContainer = () => {
           {/* {setTimeout(noData, 4000)} */}
         {/* </Row> */} 
 
-        <BoardsForm sortBoards={setSortedBy}/>
-    
+      
+        <SortBy sortBoards={sortBoards}/>
         <Row>
           {boards.map((el) => {
             return (

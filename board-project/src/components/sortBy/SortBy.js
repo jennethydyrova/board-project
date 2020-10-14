@@ -20,7 +20,7 @@ export default function SortBy({sortBoards}) {
                     <Option value="date">Date</Option>
                     <Option value="title">Title</Option>
                     <Option value="dDate">Date (descending)</Option>
-                    <Option value="dTitle">Title (descending)</Option>
+                    <Option value="dTitle"> Title (descending)</Option>
                 </Select>
             </Col>
         </Row>

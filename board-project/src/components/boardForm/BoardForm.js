@@ -6,7 +6,7 @@ import "antd/dist/antd.css";
 import {Card, Col, Button} from "antd";
 import { DownOutlined,PlusOutlined } from '@ant-design/icons';
 import { Menu, Dropdown, message, Tooltip } from 'antd';
-import SortBy from "./SortBy"
+
 
 
 
@@ -68,7 +68,7 @@ const BoardForm = ({sortBoards}) => {
           </Button>
         </Form>
       </Card>
-      <SortBy sortBoards= {sortBoards}/>
+    
     </div>
   );
 };
