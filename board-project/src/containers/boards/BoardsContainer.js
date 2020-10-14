@@ -6,15 +6,18 @@ import { Container } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "antd/dist/antd.css";
-import {Card} from "antd"
+import {Card, List, Switch} from "antd"
 // import Loading from "../../components/board/Loading"
 import {byTitle, byTitleD, byDate, byDateD} from "../../functions"
 import SortBy from '../../components/sortBy/SortBy'
+import ListView from '../../components/listView'
+
 
 const BoardsContainer = () => {
   const [boards, setBoards] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
   const [sortedBy, setSortedBy] = useState("")
+  const [listView, setListView] = useState(false)
 
 
   const sortBoards = (sortedBy) => {
@@ -100,30 +103,18 @@ const BoardsContainer = () => {
   }, []);
 
 
-    
-
-  // const noData = () => {
-  //   if (boards.length === 0) {
-  //     setIsLoading(null)
-  //   }
-  // }
-
-
-
-
+ const handleChange = () => {
+    setListView(!listView)
+  }
 
   return (
     <div>
-      {/* <Container>
-        <Row style={{display:"flex", justifyContent: "center"}}>
-          {isLoading? <Loading />: null}
-          {/* {setTimeout(noData, 4000)} */}
-        {/* </Row> */} 
-
-      
+ 
+        <Switch onChange={(e) => handleChange(e)} />
         <SortBy sortBoards={sortBoards}/>
         <Row>
-          {boards.map((el) => {
+{ listView ? 
+    boards.map((el) => {
             return (
               <Card.Grid>
                 <Board
@@ -133,15 +124,24 @@ const BoardsContainer = () => {
                   boardsId={el.id}
                 />
                </Card.Grid>
+            )
+          })
+            :
+           boards.map((el) => {
+            return (
+              <List.Item>
+                <ListView
+                  key={el.id}
+                  boardTitle={el.title}
+                  boardsItems={el.items ? el.items : []}
+                  boardsId={el.id}
+                />
+               </List.Item>
             );
-          })}
-          </Row>
-          {/* <Col>
-            {!isLoading? <BoardsForm sortBoards={setSortedBy}/>: null}
-          </Col>
-        
-          
-      </Container> */}
+          })
+        }
+        </Row>
+
     </div>
   );
 };
