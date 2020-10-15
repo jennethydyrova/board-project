@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import ItemForm from "../item/ItemForm";
 import Items from "../../containers/items/Items";
-// import Card from "react-bootstrap/Card";
-// import Button from "react-bootstrap/Button";
 import db from "../../firebaseConfig";
-// import { Container } from "react-bootstrap";
-// import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
-import { Card, Col, Row, Button } from 'antd';
+import { Card, Col, Row, Button, Typography, Input, Space } from 'antd';
+import { EditOutlined } from '@ant-design/icons';
 
 const Board = ({ boardTitle, boardsItems, boardsId }) => {
   const handleClick = (e) => {
@@ -15,10 +11,57 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
     db.collection("boards").doc(boardsId).delete();
   };
 
+const [editing, setEditing] = useState(false)
+const [userInput, setUserInput] = useState("")
+const { Title } = Typography
+
+const handleEdit = () => {
+  setEditing(true)
+}
+
+const handleEnter = (e) => {
+  if (e.key === "Enter") {
+    setEditing(false)
+    editTitle()
+    setUserInput("")
+  }
+}
+
+const handleChange = (e) => {
+  setUserInput(e.target.value)
+}
+
+const editTitle = async () => {
+  const newTitle = userInput;
+  await db.collection("boards").doc(boardsId).update({
+    title: newTitle
+  });
+}
+
+const theTitle = <Title style={{color:"white"}} level={2}>
+                <Row >
+                  <Col span={10}>
+                    {boardTitle} 
+                  </Col>
+                  <Col span={2} offset={10}>
+                    <Button className="form-btn" onClick={handleEdit}>
+                      <EditOutlined />
+                    </Button>
+                  </Col>
+                  </Row>
+                </Title>;
+const editingTitle = <Title style={{color:"white"}} level={2}>
+  <Input placeholder="Enter new title name" className="input-field" 
+  onKeyDown={(e) => handleEnter(e)}
+  onChange={(e) => handleChange(e)}/>
+  </Title>;
+
+const cardTitle = editing? editingTitle:theTitle 
+
   return (
     // <div className="site-card-wrapper">
 
-        <Card title={boardTitle} bordered={false} className="card">
+        <Card title={cardTitle} bordered={false} className="card">
           
         <Items
             boardTitle={boardTitle}

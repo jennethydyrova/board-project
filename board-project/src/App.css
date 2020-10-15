@@ -68,11 +68,7 @@
     color: rgb(235, 230, 230);
 }
 
-input {
-    border-width: 0.1em;
-    border-radius: 0.2em;
-    
-}
+
 
 .content-header {
     display: flex;
@@ -90,4 +86,8 @@ input {
     background-color: #5c5d63;   
     color:#5ec3cd;
     border-color:#5ec3cd;
+}
+
+.title {
+    color:white;
 }
