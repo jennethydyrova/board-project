@@ -48,13 +48,14 @@ const ItemForm = ({ boardsItems, boardsId }) => {
   };
 
   const handleDueChange = (value) => {
+    console.log("dueCHage", value)
     message.info(
       `Selected Date: ${value ? value.format("YYYY-MM-DD") : "None"}`
     );
     // console.log("asdas",value.toDate().toISOString().substr(0,10))
     setUserInput({
       ...userInput,
-      due: value.toDate().toISOString().substr(0, 10),
+      due: value === null? value : value.toDate().toISOString().substr(0, 10),
     });
   };
 
@@ -69,6 +70,7 @@ const ItemForm = ({ boardsItems, boardsId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addItem();
+    console.log("date", defaultDate)
     setUserInput({
       title: "",
       id: "",
@@ -77,31 +79,36 @@ const ItemForm = ({ boardsItems, boardsId }) => {
       assigner: "",
       completed: false
     });
+    console.log("datt",userInput.due)
   };
 
   return (
     <div>
-      <Form >
+      <Form onSubmit={(e) => handleSubmit(e)}>
         <input
           name="items"
           onChange={(e) => handleInputValue(e)}
           value={userInput.title}
+          className = "input-field"
           placeholder="Task title"
         />
         <DatePicker
           onChange={(e) => handleDueChange(e)}
-          defaultValue={moment(defaultDate)}
+          value={userInput.due === null? "" :moment(userInput.due)}
+          className="form-btn"
         />
         <input
           name="assigner"
           onChange={(e) => handleAssignerChange(e)}
           value={userInput.assigner}
+          className = "input-field"
           placeholder="Assigner"
         />
         <input
           name="assignee"
           onChange={(e) => handleAssigneeChange(e)}
           value={userInput.assignee}
+          className = "input-field"
           placeholder="Assignee"
         />
         <Button
@@ -109,6 +116,7 @@ const ItemForm = ({ boardsItems, boardsId }) => {
           type="submit"
           size="sm"
           onClick={(e) => handleSubmit(e)}
+          className="form-btn"
         >
           Add item
         </Button>

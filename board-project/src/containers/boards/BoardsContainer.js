@@ -109,15 +109,24 @@ const BoardsContainer = () => {
 
   return (
     <div>
- 
-        <Switch onChange={(e) => handleChange(e)} />
-        <SortBy sortBoards={sortBoards}/>
-        <BoardsForm />
+      <Row className="content-header">
+        <Col>
+          <Col>
+            <BoardsForm />
+          </Col>
+          <Col>
+            <Switch onChange={(e) => handleChange(e)} />
+          </Col>
+          <Col>
+            <SortBy sortBoards={sortBoards}/>
+          </Col>
+        </Col>
+      </Row>
         <Row>
 { listView ? 
     boards.map((el) => {
             return (
-              <Card.Grid>
+              <Card.Grid >
                 <Board
                   key={el.id}
                   boardTitle={el.title}
@@ -130,7 +139,7 @@ const BoardsContainer = () => {
             :
            boards.map((el) => {
             return (
-              <List.Item>
+              <List.Item >
                 <ListView
                   key={el.id}
                   boardTitle={el.title}

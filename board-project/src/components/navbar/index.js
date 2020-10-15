@@ -32,6 +32,11 @@ const Sider = () => {
     });
   };
 
+  const buttonBackground = {
+    backgroundColor: "#36096d",
+    backgroundImmage: "linear-gradient(315deg, #36096d 0%, #37d5d6 74%)"
+  }
+
   return (
     <>
       <Switch
@@ -51,13 +56,13 @@ const Sider = () => {
         mode="inline"
       >
         {/* <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One"> */}
-        <Menu.Item key="1" icon={<HomeOutlined />} onClick= {(e) => handleClick(e)}>
+        <Menu.Item className= "navbarItem1" key="1" icon={<HomeOutlined />} onClick= {(e) => handleClick(e)}>
           <NavLink to="/">Home</NavLink>
         </Menu.Item>
-        <Menu.Item key="2" icon={<QuestionCircleOutlined />} onClick= {(e) => handleClick(e)}>
+        <Menu.Item className= "navbarItem1" key="2" icon={<QuestionCircleOutlined />} onClick= {(e) => handleClick(e)}>
           <NavLink to="/about">About</NavLink>
         </Menu.Item>
-        <Menu.Item key="3" icon={<ThunderboltOutlined />} onClick= {(e) => handleClick(e)}>
+        <Menu.Item className= "navbarItem1" key="3" icon={<ThunderboltOutlined />} onClick= {(e) => handleClick(e)}>
           <NavLink to="/completed">Completed</NavLink>
         </Menu.Item>
         {/* </SubMenu> */}

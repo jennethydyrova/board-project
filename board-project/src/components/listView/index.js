@@ -18,7 +18,7 @@ const ListView = ({ boardTitle, boardsItems, boardsId }) => {
   return (
     // <div className="site-card-wrapper">
 
-        <Card title={boardTitle} bordered={false}>
+        <Card title={boardTitle} bordered={false} className="card">
           
         <Items
             boardTitle={boardTitle}

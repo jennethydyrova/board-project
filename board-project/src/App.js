@@ -11,7 +11,8 @@ import { Row, Col, Layout, Menu } from "antd";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import About from "./components/about/index";
 import CompletedTasks from "./components/completed/index";
-import BoardForm from "./components/boardForm/BoardForm"
+import BoardForm from "./components/boardForm/BoardForm";
+import "./App.css"
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -22,15 +23,15 @@ function App() {
         <Sider collapsible>
           <Sidebar />
         </Sider>
-        <Layout>
-          <Header style={{ backgroundColor: "#f0f2ff" }}>Header</Header>
-          <Content>
+        <Layout className="layout">
+          <Header className="header" >Header</Header>
+          <Content className="content">
             {" "}
             <Route exact path="/" component={BoardsContainer} />
             <Route path="/about" component={About} />
             <Route path="/completed" component={CompletedTasks} />
           </Content>
-          <Footer>Footer</Footer>
+          {/* <Footer className="footer" style={{backgroundColor: "#1F212A"}}>Footer</Footer> */}
         </Layout>
       </Layout>
     </Router>

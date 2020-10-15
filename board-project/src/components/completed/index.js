@@ -56,7 +56,7 @@ const gridStyle = {
   return (
 completedTaskList.map((item) => {
   return (
-    <Collapse style={{ width: "100%" }} defaultActiveKey={["1"]}>
+    <Collapse style={{ width: "100%" }} defaultActiveKey={["1"]} className="completed">
  <Panel header={item.title} key={item.id}>
    
 {item.items.filter((el) => el.completed === true ).map((el) => {

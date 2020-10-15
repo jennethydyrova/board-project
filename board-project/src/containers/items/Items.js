@@ -11,24 +11,64 @@ const ItemsContainer = ({ boardsItems, boardTitle, boardsId }) => {
   // console.log(boardsItems.data().items
   const [sortedBy, setSortedBy] = useState("title")
 
-  useEffect(() => {
+  const sortItems = (sortedBy) => {
     switch(sortedBy){
       case "title":
-          setItems(items.sort(byTitle))
+          setItems((prevItems) => {
+            let newItems = [...prevItems]
+            newItems = newItems.sort(byTitle)
+            return newItems
+          })
           break
       case "dTitle":
-          setItems(items.sort(byTitleD))
+          setItems((prevItems) => {
+            let newItems = [...prevItems]
+            newItems = newItems.sort(byTitleD)
+            return newItems
+          })
           break
       case "due":
-          setItems(items.sort(byDeadline))
+          setItems((prevItems) => {
+            let newItems = [...prevItems]
+            newItems = newItems.sort(byDeadline)
+            return newItems
+          })
           break
       case "dDue":
-          setItems(items.sort(byDeadlineD))
+          setItems((prevItems) => {
+            let newItems = [...prevItems]
+            newItems = newItems.sort(byDeadlineD)
+            return newItems
+          })
           break
-      default: setItems(items.sort(byTitle))
-
+      default:
+          setItems((prevItems) => {
+            let newItems = [...prevItems]
+            newItems = newItems.sort(byTitle)
+            return newItems
+          })
     }
-  }, [sortedBy])
+
+  }
+
+  // useEffect(() => {
+  //   switch(sortedBy){
+  //     case "title":
+  //         setItems(items.sort(byTitle))
+  //         break
+  //     case "dTitle":
+  //         setItems(items.sort(byTitleD))
+  //         break
+  //     case "due":
+  //         setItems(items.sort(byDeadline))
+  //         break
+  //     case "dDue":
+  //         setItems(items.sort(byDeadlineD))
+  //         break
+  //     default: setItems(items.sort(byTitle))
+
+  //   }
+  // }, [sortedBy])
 
   useEffect(()=> {
     console.log("boards",boardsItems)
@@ -39,7 +79,7 @@ const ItemsContainer = ({ boardsItems, boardTitle, boardsId }) => {
  
   return (
     <>
-      <SortItemsBy sortItems={setSortedBy} />
+      <SortItemsBy sortItems={sortItems} />
       <div>
        
         {notCompletedItems.map((item) => {

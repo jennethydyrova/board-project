@@ -44,7 +44,7 @@ const BoardForm = ({sortBoards}) => {
   return (
     <div>
       
-      <Card boarder="info" style={{ width: "18rem", height: "100%" }}>
+      <Card boarder="info" style={{ width: "18rem", height: "100%" }} className="card">
         <Form onSubmit={(e) => handleSubmit(e)} style={{ display:"flex", justifyContent: "center", flexDirection:"column"}}>
           <Form.Row>
             <Form.Group controlId="addBoard">
@@ -53,6 +53,7 @@ const BoardForm = ({sortBoards}) => {
                 placeholder="Enter board name"
                 name="title"
                 value={newBoard.title}
+                className = "input-field"
                 onChange={(e) => handleInputValue(e)}
               />
             </Form.Group>
@@ -63,6 +64,7 @@ const BoardForm = ({sortBoards}) => {
             size="lg"
             onClick={(e) => handleSubmit(e)}
             style={{ width: '60%' }}
+            className="board-btn"
           >
             <PlusOutlined /> Add board
           </Button>

@@ -18,7 +18,7 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
   return (
     // <div className="site-card-wrapper">
 
-        <Card title={boardTitle} bordered={false}>
+        <Card title={boardTitle} bordered={false} className="card">
           
         <Items
             boardTitle={boardTitle}
@@ -28,7 +28,8 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
           <Button variant="outline-info"
             type="submit"
             size="sm"
-            onClick={(e) => handleClick(e)}>
+            onClick={(e) => handleClick(e)}
+            className="form-btn">
             Delete Board
           </Button>
         </Card>
