@@ -17,7 +17,7 @@ const BoardsContainer = () => {
   const [boards, setBoards] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
   const [sortedBy, setSortedBy] = useState("")
-  const [listView, setListView] = useState(false)
+  const [listView, setListView] = useState(true)
 
 
   const sortBoards = (sortedBy) => {
@@ -112,6 +112,7 @@ const BoardsContainer = () => {
  
         <Switch onChange={(e) => handleChange(e)} />
         <SortBy sortBoards={sortBoards}/>
+        <BoardsForm />
         <Row>
 { listView ? 
     boards.map((el) => {
