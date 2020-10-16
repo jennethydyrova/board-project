@@ -47,14 +47,14 @@ const ItemForm = ({ boardsItems, boardsId }) => {
   };
 
   const handleDueChange = (value) => {
-    console.log("dueCHage", value)
+    console.log("dueCHage", value);
     message.info(
       `Selected Date: ${value ? value.format("YYYY-MM-DD") : "None"}`
     );
     // console.log("asdas",value.toDate().toISOString().substr(0,10))
     setUserInput({
       ...userInput,
-      due: value === null? value : value.toDate().toISOString().substr(0, 10),
+      due: value === null ? value : value.toDate().toISOString().substr(0, 10),
     });
   };
 
@@ -69,56 +69,50 @@ const ItemForm = ({ boardsItems, boardsId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addItem();
-    console.log("date", defaultDate)
+    console.log("date", defaultDate);
     setUserInput({
       title: "",
       id: "",
       due: defaultDate,
       assignee: "",
       assigner: "",
-      completed: false
+      completed: false,
     });
-    console.log("datt",userInput.due)
+    console.log("datt", userInput.due);
   };
-  
+
   const formStyle = {
-    marginTop: '10px'
-  }
+    marginTop: "10px",
+  };
 
   return (
     <div>
-      <Form labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        layout="horizontal" onSubmit={(e) => handleSubmit(e)}
-       >
+      <Form onSubmit={(e) => handleSubmit(e)}>
         <Input
-        style={formStyle}
           name="items"
           onChange={(e) => handleInputValue(e)}
           value={userInput.title}
-          className = "input-field"
+          className="input-field"
           placeholder="Task title"
         />
         <DatePicker
-        style={formStyle}
+          style={formStyle}
           onChange={(e) => handleDueChange(e)}
-          value={userInput.due === null? "" :moment(userInput.due)}
+          value={userInput.due === null ? "" : moment(userInput.due)}
           className="form-btn"
         />
         <Input
-        style={formStyle}
           name="assigner"
           onChange={(e) => handleAssignerChange(e)}
           value={userInput.assigner}
-          className = "input-field"
+          className="input-field"
           placeholder="Assigner"
         />
         <Input
-        style={formStyle}
           name="assignee"
           onChange={(e) => handleAssigneeChange(e)}
           value={userInput.assignee}
-          className = "input-field"
+          className="input-field"
           placeholder="Assignee"
         />
         <Button
