@@ -199,7 +199,7 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
           </Modal>
         </Panel>
       </Collapse>
-      <Col style={{ marginLeft: "10px" }}>
+      <Col style={{ marginLeft: "1rem" }}>
         <DeleteOutlined
           style={{ cursor: "pointer" }}
           onClick={(e) => handleClick(e)}
