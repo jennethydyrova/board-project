@@ -57,11 +57,11 @@ const gridStyle = {
 completedTaskList.map((item) => {
   return (
     <Collapse style={{ width: "100%" }} defaultActiveKey={["1"]} className="completed">
- <Panel header={item.title} key={item.id}>
+ <Panel  header={item.title} key={item.id}>
    
 {item.items.filter((el) => el.completed === true ).map((el) => {
 return (
-  <Card.Grid title={el.title} style={gridStyle}>
+  <Card.Grid className= "completed-card" title={el.title} style={gridStyle}>
     <p>Title: {el.title}</p>
     <p>Assigner: {el.assigner}</p>
     <p>Assignee: {el.assignee}</p>

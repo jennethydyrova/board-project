@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import db from "../../firebaseConfig";
-import { DatePicker, message, Button, Form, Input } from "antd";
+import { DatePicker, message, Button, Form, Input, Row } from "antd";
 import "antd/dist/antd.css";
 import "moment/locale/zh-cn";
 import moment from "moment";
@@ -92,27 +92,27 @@ const ItemForm = ({ boardsItems, boardsId }) => {
           name="items"
           onChange={(e) => handleInputValue(e)}
           value={userInput.title}
-          className="input-field"
+          className="input-field item-input"
           placeholder="Task title"
         />
-        <DatePicker
-          style={formStyle}
-          onChange={(e) => handleDueChange(e)}
-          value={userInput.due === null ? "" : moment(userInput.due)}
-          className="form-btn"
-        />
+          <DatePicker
+            style={formStyle}
+            onChange={(e) => handleDueChange(e)}
+            value={userInput.due === null ? "" : moment(userInput.due)}
+            className="form-btn"
+          />
         <Input
           name="assigner"
           onChange={(e) => handleAssignerChange(e)}
           value={userInput.assigner}
-          className="input-field"
+          className="input-field item-input"
           placeholder="Assigner"
         />
         <Input
           name="assignee"
           onChange={(e) => handleAssigneeChange(e)}
           value={userInput.assignee}
-          className="input-field"
+          className="input-field item-input"
           placeholder="Assignee"
         />
         <Button
