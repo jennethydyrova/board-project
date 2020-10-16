@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import db from "../../firebaseConfig";
 import Board from "../../components/board/Board";
 import BoardsForm from "../../components/boardForm/BoardForm";
-import { Container } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "antd/dist/antd.css";
-import {Card, List, Switch} from "antd"
-// import Loading from "../../components/board/Loading"
+import {Card, List, Switch, Menu, Dropdown} from "antd"
 import {byTitle, byTitleD, byDate, byDateD} from "../../functions"
 import SortBy from '../../components/sortBy/SortBy'
 import ListView from '../../components/listView'
+import BoardViewImg from './chess-board.svg' 
 
 
 const BoardsContainer = () => {
@@ -21,29 +20,30 @@ const BoardsContainer = () => {
 
 
   const sortBoards = (sortedBy) => {
+    console.log(sortedBy)
     switch(sortedBy){
-      case "title":
+      case "2":
         setBoards((prevBoards) => {
           const newBoards = [...prevBoards];
           let newBoard = newBoards.sort(byTitle)
           return newBoard
         })
           break
-      case "dTitle":
+      case "4":
         setBoards((prevBoards) => {
           const newBoards = [...prevBoards];
           let newBoard = newBoards.sort(byTitleD)
           return newBoard
         })
           break
-      case "date":
+      case "1":
         setBoards((prevBoards) => {
           const newBoards = [...prevBoards];
           let newBoard = newBoards.sort(byDate)
           return newBoard
         })
           break
-      case "dDate":
+      case "3":
         setBoards((prevBoards) => {
           const newBoards = [...prevBoards];
           let newBoard = newBoards.sort(byDateD)
@@ -107,26 +107,53 @@ const BoardsContainer = () => {
     setListView(!listView)
   }
 
+  const gridStyle = {
+    margin: '15px',
+    width: '30%'
+  }
+
+const dropdownView = () => {
+  return (
+    <Menu onClick={e => handleChange(e)}>
+      <Menu.Item key="1">Board</Menu.Item>
+      <Menu.Item key="2">List</Menu.Item>
+    </Menu>
+)
+}
+  const boardViewStyle = {
+    width: '15px',
+    color: 'white'
+  }
+
   return (
     <div>
       <Row className="content-header">
-        <Col>
+      
           <Col>
             <BoardsForm />
           </Col>
-          <Col>
-            <Switch onChange={(e) => handleChange(e)} />
-          </Col>
+          </Row>
+      <Row>
+       <Col>
+       <p>View</p>
+       </Col>
+       <Col>
+       <Dropdown overlay={dropdownView}>
+    <img src={BoardViewImg} style={boardViewStyle} onClick={e => e.preventDefault()} />
+  </Dropdown>
+       </Col>
+       </Row>
+
           <Col>
             <SortBy sortBoards={sortBoards}/>
           </Col>
-        </Col>
-      </Row>
+        
+
         <Row>
 { listView ? 
     boards.map((el) => {
             return (
-              <Card.Grid >
+              <Card.Grid style={gridStyle}>
                 <Board
                   key={el.id}
                   boardTitle={el.title}

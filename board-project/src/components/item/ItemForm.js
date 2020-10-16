@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import db from "../../firebaseConfig";
-import { DatePicker, message, Button, Form } from "antd";
+import { DatePicker, message, Button, Form, Input } from "antd";
 import "antd/dist/antd.css";
 import "moment/locale/zh-cn";
 import moment from "moment";
-// import Button from "react-bootstrap/Button";
 
 const ItemForm = ({ boardsItems, boardsId }) => {
   // const [items, setItems] = useState(oneBoard);
@@ -81,11 +80,19 @@ const ItemForm = ({ boardsItems, boardsId }) => {
     });
     console.log("datt",userInput.due)
   };
+  
+  const formStyle = {
+    marginTop: '10px'
+  }
 
   return (
     <div>
-      <Form onSubmit={(e) => handleSubmit(e)}>
-        <input
+      <Form labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
+        layout="horizontal" onSubmit={(e) => handleSubmit(e)}
+       >
+        <Input
+        style={formStyle}
           name="items"
           onChange={(e) => handleInputValue(e)}
           value={userInput.title}
@@ -93,18 +100,21 @@ const ItemForm = ({ boardsItems, boardsId }) => {
           placeholder="Task title"
         />
         <DatePicker
+        style={formStyle}
           onChange={(e) => handleDueChange(e)}
           value={userInput.due === null? "" :moment(userInput.due)}
           className="form-btn"
         />
-        <input
+        <Input
+        style={formStyle}
           name="assigner"
           onChange={(e) => handleAssignerChange(e)}
           value={userInput.assigner}
           className = "input-field"
           placeholder="Assigner"
         />
-        <input
+        <Input
+        style={formStyle}
           name="assignee"
           onChange={(e) => handleAssigneeChange(e)}
           value={userInput.assignee}
@@ -117,6 +127,7 @@ const ItemForm = ({ boardsItems, boardsId }) => {
           size="sm"
           onClick={(e) => handleSubmit(e)}
           className="form-btn"
+          style={formStyle}
         >
           Add item
         </Button>

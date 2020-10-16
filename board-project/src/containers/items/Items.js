@@ -13,62 +13,43 @@ const ItemsContainer = ({ boardsItems, boardTitle, boardsId }) => {
 
   const sortItems = (sortedBy) => {
     switch(sortedBy){
-      case "title":
+      case "2":
           setItems((prevItems) => {
             let newItems = [...prevItems]
-            newItems = newItems.sort(byTitle)
-            return newItems
+            let newItem = newItems.sort(byTitle)
+            return newItem
           })
           break
-      case "dTitle":
+      case "4":
           setItems((prevItems) => {
             let newItems = [...prevItems]
-            newItems = newItems.sort(byTitleD)
-            return newItems
+            let newItem = newItems.sort(byTitleD)
+            return newItem
           })
           break
-      case "due":
+      case "1":
           setItems((prevItems) => {
             let newItems = [...prevItems]
-            newItems = newItems.sort(byDeadline)
-            return newItems
+            let newItem = newItems.sort(byDeadline)
+            return newItem
           })
           break
-      case "dDue":
+      case "3":
           setItems((prevItems) => {
             let newItems = [...prevItems]
-            newItems = newItems.sort(byDeadlineD)
-            return newItems
+            let newItem = newItems.sort(byDeadlineD)
+            return newItem
           })
           break
       default:
           setItems((prevItems) => {
             let newItems = [...prevItems]
-            newItems = newItems.sort(byTitle)
-            return newItems
+            let newItem = newItems.sort(byTitle)
+            return newItem
           })
     }
 
   }
-
-  // useEffect(() => {
-  //   switch(sortedBy){
-  //     case "title":
-  //         setItems(items.sort(byTitle))
-  //         break
-  //     case "dTitle":
-  //         setItems(items.sort(byTitleD))
-  //         break
-  //     case "due":
-  //         setItems(items.sort(byDeadline))
-  //         break
-  //     case "dDue":
-  //         setItems(items.sort(byDeadlineD))
-  //         break
-  //     default: setItems(items.sort(byTitle))
-
-  //   }
-  // }, [sortedBy])
 
   useEffect(()=> {
     console.log("boards",boardsItems)
@@ -81,7 +62,6 @@ const ItemsContainer = ({ boardsItems, boardTitle, boardsId }) => {
     <>
       <SortItemsBy sortItems={sortItems} />
       <div>
-       
         {notCompletedItems.map((item) => {
           return <Item key={item.id} task={item} boardsId={boardsId} 
           boardsItems={boardsItems} setItems={setItems}/>;
@@ -92,7 +72,6 @@ const ItemsContainer = ({ boardsItems, boardTitle, boardsId }) => {
           boardTitle={boardTitle}
           boardsItems={boardsItems}
           boardsId={boardsId}
-          // itemData={setFollowedItems}
         />
       </div>
     </>

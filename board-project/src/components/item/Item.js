@@ -131,12 +131,14 @@ const completeStatus = async() => {
 
 }
 
-
+const collapseStyle={
+  backgroundColor: '282934'
+}
 
   return (
-    <div style={style.items}>
-      <Collapse style={{ width: "100%" }} defaultActiveKey={["1"]}>
-        <Panel header={task.title} key={task.id}>
+    <div style={style.items} >
+      <Collapse style={{ width: "100%" }} defaultActiveKey={["1"]} >
+        <Panel header={task.title} key={task.id} > 
           <p>Assigner: {task.assigner}</p>
           <p>Assignee: {task.assignee}</p>
           <p>Due date: {task.due}</p>
@@ -203,7 +205,7 @@ const completeStatus = async() => {
         </Panel>
       </Collapse>
       <DeleteOutlined
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer" ,  marginTop: '10px'}}
         onClick={(e) => handleClick(e)}
       />
       <Checkbox onClick={e => completeHandler(e)} checked={task.completed === true ? true : false}></Checkbox>

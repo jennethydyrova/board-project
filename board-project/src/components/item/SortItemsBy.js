@@ -1,27 +1,47 @@
 import React, {Component} from "react";
 import { DownOutlined,PlusOutlined } from '@ant-design/icons';
 import { Menu, Dropdown, message, Tooltip, Button, Select, Row, Col } from 'antd';
+import sortImg from '../sortBy/sort.svg'
 
 export default function SortItemsBy({sortItems}) {
     const {Option} = Select
     
-    const handleChange = (value) => {
-        sortItems(value)
+    const handleClick = (e) => {
+        sortItems(e.key)
+        // console.log(key)
     }
+  
+const dropdownSort = () => {
+    return (
+        <Menu onClick={e => handleClick(e)}>
+          <Menu.Item key="1" value='date'>Due</Menu.Item>
+          <Menu.Item key="2" value="title">Title</Menu.Item>
+          <Menu.Item key="3" value="dDate">Due (descending)</Menu.Item>
+          <Menu.Item key="4" value="dTitle">Title (descending)</Menu.Item>
+        </Menu>
+    )
+
+
+}
+
+const styleSortImg = {
+    width: '25px',
+    color: 'white'
+}
 
     return (
         <>
         <Row>
             <Col>
-                <p>Sort items by:</p>
+                <p>Sort</p>
             </Col>
             <Col>
-                <Select defaultValue="title" onChange={handleChange} style={{width: "6em"}}>
-                    <Option value="due">Due date</Option>
-                    <Option value="title">Title</Option>
-                    <Option value="dDue">Due date (descending)</Option>
-                    <Option value="dTitle">Title (descending)</Option>
-                </Select>
+            <Dropdown overlay={dropdownSort}>
+    <img src={sortImg} style={styleSortImg} onClick={e => e.preventDefault()}>
+      
+    </img>
+  </Dropdown>
+
             </Col>
         </Row>
         </>

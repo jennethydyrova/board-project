@@ -15,6 +15,7 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
     db.collection("boards").doc(boardsId).delete();
   };
 
+
   return (
     // <div className="site-card-wrapper">
 
@@ -26,6 +27,7 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
             boardsItems={boardsItems}
           />
           <Button variant="outline-info"
+          style={{marginTop: '10px'}}
             type="submit"
             size="sm"
             onClick={(e) => handleClick(e)}
