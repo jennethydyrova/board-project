@@ -39,21 +39,15 @@ const Sider = () => {
 
   return (
     <>
-      <Switch
-        checked={theme.theme === "dark"}
-        onClick={(e) => changeTheme(e)}
-        checkedChildren="Dark"
-        unCheckedChildren="Light"
-      />
       <br />
       <br />
       <Menu
         theme={theme.theme}
-        // onClick={(e) => handleClick(e)}
-        style={{ width: "100%" }}
+        style={{ width: "100%", backgroundColor: "rgb(41, 44, 56)" }}
         defaultOpenKeys={["sub1"]}
         selectedKeys={[theme.current]}
         mode="inline"
+        className="sider-element"
       >
         {/* <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One"> */}
         <Menu.Item className= "navbarItem1" key="1" icon={<HomeOutlined />} onClick= {(e) => handleClick(e)}>
@@ -65,21 +59,6 @@ const Sider = () => {
         <Menu.Item className= "navbarItem1" key="3" icon={<ThunderboltOutlined />} onClick= {(e) => handleClick(e)}>
           <NavLink to="/completed">Completed</NavLink>
         </Menu.Item>
-        {/* </SubMenu> */}
-        {/* <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
-          <Menu.Item key="5">Option 5</Menu.Item>
-          <Menu.Item key="6">Option 6</Menu.Item>
-          <SubMenu key="sub3" title="Submenu">
-            <Menu.Item key="7">Option 7</Menu.Item>
-            <Menu.Item key="8">Option 8</Menu.Item>
-          </SubMenu>
-        </SubMenu>
-        <SubMenu key="sub4" icon={<SettingOutlined />} title="Navigation Three">
-          <Menu.Item key="9">Option 9</Menu.Item>
-          <Menu.Item key="10">Option 10</Menu.Item>
-          <Menu.Item key="11">Option 11</Menu.Item>
-          <Menu.Item key="12">Option 12</Menu.Item>
-        </SubMenu> */}
       </Menu>
     </>
   );

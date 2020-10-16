@@ -91,3 +91,11 @@
 .title {
     color:white;
 }
+
+.sider-element{
+    background-color:rgb(41, 44, 56) ;
+}
+
+.ant-layout-sider-trigger{
+    background-color: rgb(35, 37, 48);
+}

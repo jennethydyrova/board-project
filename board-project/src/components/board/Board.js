@@ -19,13 +19,23 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
     setEditing(true);
   };
 
-  const handleEnter = (e) => {
-    if (e.key === "Enter") {
-      setEditing(false);
-      editTitle();
-      setUserInput("");
-    }
-  };
+const handleEnter = (e) => {
+  console.log(e.key)
+  if (e.key === "Enter") {
+    setEditing(false)
+    editTitle()
+    setUserInput("")
+  }
+  else if (e.key ==="Escape"){
+    setUserInput("")
+    setEditing(false)
+  }
+}
+
+const handleBlur = () => {
+  setUserInput("")
+  setEditing(false)
+}
 
   const handleChange = (e) => {
     setUserInput(e.target.value);
@@ -38,6 +48,7 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
     });
   };
 
+<<<<<<< HEAD
   const theTitle = (
     <Title style={{ color: "white" }} level={2}>
       <Row>
@@ -60,6 +71,26 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
       />
     </Title>
   );
+=======
+const theTitle = <Title style={{color:"white"}} level={2}>
+                <Row >
+                  <Col span={10}>
+                    {boardTitle} 
+                  </Col>
+                  <Col span={2} offset={10}>
+                    <Button className="form-btn" onClick={handleEdit}>
+                      <EditOutlined />
+                    </Button>
+                  </Col>
+                  </Row>
+                </Title>;
+const editingTitle = <Title style={{color:"white"}} level={2}>
+  <Input placeholder="Enter new title name (Esc to cancel)" className="input-field" 
+  onKeyDown={(e) => handleEnter(e)}
+  onChange={(e) => handleChange(e)}
+  onBlur={handleBlur}/>
+  </Title>;
+>>>>>>> f1b61b225a7e5fff2edcdc7a226d8ffa71723779
 
   const cardTitle = editing ? editingTitle : theTitle;
 

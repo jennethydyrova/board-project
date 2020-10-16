@@ -20,7 +20,7 @@ function App() {
   return (
     <Router>
       <Layout style={{ height: "100vh" }}>
-        <Sider collapsible>
+        <Sider className="sider-element" collapsible>
           <Sidebar />
         </Sider>
         <Layout className="layout">
