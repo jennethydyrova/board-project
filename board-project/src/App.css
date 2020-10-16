@@ -4,8 +4,8 @@
   }
 
 .ant-menu.ant-menu-dark .ant-menu-item-selected.navbarItem1 {
-    background-color: #abe9cd;
-    background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
+    background-color: #7f53ac;
+    background-image: linear-gradient(315deg, #7f53ac 0%, #647dee 74%);
 }
 
 .ant-menu.ant-menu-dark .ant-menu-item-selected.navbarItem2 {
@@ -16,6 +16,20 @@
 .board-btn{
     background-color: #7f53ac;
     background-image: linear-gradient(315deg, #7f53ac 0%, #647dee 74%);
+}
+
+.board-btn:hover{
+    background-image: linear-gradient(315deg, #7f53ac 0%, #647dee 74%);
+    color:#5ec3cd;
+    border-color:#5ec3cd;
+}
+.board-btn:focus{
+    background-color: #7f53ac;
+    background-image: linear-gradient(315deg, #7f53ac 0%, #647dee 74%);
+}
+
+.item-input{
+    width: 23.43em;
 }
 
 .content,
@@ -53,13 +67,9 @@
 
 
 
-.ant-card-grid,
-.ant-card-grid-hoverable{
-    box-shadow:yellow;
-}
-
 .input-field {
     background-color: #282934; 
+    color: rgb(235, 230, 230);
 }
 
 .input-field:hover,
@@ -68,7 +78,14 @@
     color: rgb(235, 230, 230);
 }
 
+.ant-picker-input > input{
+    color: rgb(235, 230, 230);
+}
 
+
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
+    color: rgb(235, 230, 230);
+}
 
 .content-header {
     display: flex;
@@ -98,4 +115,39 @@
 
 .ant-layout-sider-trigger{
     background-color: rgb(35, 37, 48);
+}
+
+div.ant-collapse-content-box{
+    background-color: #5c5d63;
+    color: rgb(235, 230, 230);
+}
+
+.completed-card{
+    background-color: #6f7177;
+}
+
+.item-title{
+    width: 100%;
+    background-color:#45464c;
+    color: rgb(235, 230, 230);
+    border: none;
+}
+
+.ant-collapse-header{
+    color: rgb(235, 230, 230);
+    background-color:#45464c;
+}
+
+.about-title{
+    font-size: 10em ;
+    color: rgb(235, 230, 230);
+}
+
+h1.ant-typography{
+    color: rgb(235, 230, 230);
+}
+
+.ant-typography{
+    font-size: 1.5em;
+    color:rgb(235, 230, 230);
 }

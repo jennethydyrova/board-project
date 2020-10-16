@@ -7,7 +7,7 @@ import db from "../../firebaseConfig";
 import * as firebase from "firebase/app";
 import Modal from "react-modal";
 import { DatePicker, message } from "antd";
-import { Row, Space, Checkbox, Button, Col, Form } from "antd";
+import { Row, Space, Checkbox, Button, Col, Form, Typography } from "antd";
 import "antd/dist/antd.css";
 import "moment/locale/zh-cn";
 import moment from "moment";
@@ -18,7 +18,7 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
   const defaultDate = currentDate.toISOString().substr(0, 10);
 
   const [showResults, setShowResults] = React.useState(true);
-
+  const {Title} = Typography
   const [userInput, setUserInput] = useState({
     title: task.title,
     due: task.due,
@@ -129,19 +129,20 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
   const collapseStyle = {
     backgroundColor: "282934",
   };
-
+  
   return (
     <div style={style.items}>
-      <Collapse style={{ width: "100%" }} defaultActiveKey={["1"]}>
+      <Collapse className="item-title"  defaultActiveKey={["1"]}>
         <Panel header={task.title} key={task.id}>
-          <p>Assigner: {task.assigner}</p>
-          <p>Assignee: {task.assignee}</p>
-          <p>Due date: {task.due}</p>
+          <p className="item-element">Assigner: {task.assigner}</p>
+          <p className="item-element">Assignee: {task.assignee}</p>
+          <p className="item-element">Due date: {task.due}</p>
           <Button
             variant="outline-info"
             type="submit"
             size="sm"
             onClick={(e) => handleModal(e)}
+            className="form-btn"
           >
             Edit
           </Button>
@@ -156,16 +157,11 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
                     placeholder="Task title"
                     onChange={(e) => handleInputValue(e)}
                   />
-                  {/* </Row>
-
-                <Row> */}
                   <DatePicker
                     onChange={(e) => handleDueChange(e)}
                     defaultValue={moment(defaultDate)}
+                    style={{color:"white"}}
                   />
-                  {/* </Row>
-
-                <Row> */}
                   <input
                     name="assigner"
                     value={userInput.assigner}

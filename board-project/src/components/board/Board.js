@@ -48,39 +48,15 @@ const handleBlur = () => {
     });
   };
 
-<<<<<<< HEAD
-  const theTitle = (
-    <Title style={{ color: "white" }} level={2}>
-      <Row>
-        <Col span={10}>{boardTitle}</Col>
-        <Col span={2} offset={10}>
-          <Button className="form-btn" onClick={handleEdit}>
-            <EditOutlined />
-          </Button>
-        </Col>
-      </Row>
-    </Title>
-  );
-  const editingTitle = (
-    <Title style={{ color: "white" }} level={2}>
-      <Input
-        placeholder="Enter new title name"
-        className="input-field"
-        onKeyDown={(e) => handleEnter(e)}
-        onChange={(e) => handleChange(e)}
-      />
-    </Title>
-  );
-=======
 const theTitle = <Title style={{color:"white"}} level={2}>
                 <Row >
                   <Col span={10}>
                     {boardTitle} 
                   </Col>
                   <Col span={2} offset={10}>
-                    <Button className="form-btn" onClick={handleEdit}>
-                      <EditOutlined />
-                    </Button>
+                      <Button className="form-btn" onClick={handleEdit}>
+                        <EditOutlined />
+                      </Button>
                   </Col>
                   </Row>
                 </Title>;
@@ -90,7 +66,6 @@ const editingTitle = <Title style={{color:"white"}} level={2}>
   onChange={(e) => handleChange(e)}
   onBlur={handleBlur}/>
   </Title>;
->>>>>>> f1b61b225a7e5fff2edcdc7a226d8ffa71723779
 
   const cardTitle = editing ? editingTitle : theTitle;
 
