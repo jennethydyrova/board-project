@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import db from "../../firebaseConfig";
-import Form from "react-bootstrap/Form";
-// import Button from "react-bootstrap/Button";
 import "antd/dist/antd.css";
-import {Card, Col, Button} from "antd";
+import {Card, Col, Button, Form, Input} from "antd";
 import { DownOutlined,PlusOutlined } from '@ant-design/icons';
 import { Menu, Dropdown, message, Tooltip } from 'antd';
 
 
 
 
-const BoardForm = ({sortBoards}) => {
+const BoardForm = () => {
   const [newBoard, setNewBoard] = useState({
     title: "",
   });
@@ -40,15 +38,16 @@ const BoardForm = ({sortBoards}) => {
       title: "",
     });
   };
+  console.log(newBoard.title)
 
   return (
-    <div>
+ 
       
-      <Card boarder="info" style={{ width: "18rem", height: "100%" }} className="card">
+      <Card boarder="info" style={{ width: "18rem", height: "100%", marginLeft:'20px' }} className="card">
         <Form onSubmit={(e) => handleSubmit(e)} style={{ display:"flex", justifyContent: "center", flexDirection:"column"}}>
-          <Form.Row>
-            <Form.Group controlId="addBoard">
-              <Form.Control
+          
+            <Form.Item>
+              <Input
                 type="text"
                 placeholder="Enter board name"
                 name="title"
@@ -56,8 +55,8 @@ const BoardForm = ({sortBoards}) => {
                 className = "input-field"
                 onChange={(e) => handleInputValue(e)}
               />
-            </Form.Group>
-          </Form.Row>
+           </Form.Item>
+         
           <Button
             variant="outline-info"
             type="submit"
@@ -71,7 +70,7 @@ const BoardForm = ({sortBoards}) => {
         </Form>
       </Card>
     
-    </div>
+  
   );
 };
 

@@ -1,10 +1,10 @@
 import React from "react";
 // import Board from "./components/board/Board.js";
 import BoardsContainer from "./containers/boards/BoardsContainer";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import "antd/dist/antd.css";
 import Sidebar from "./components/navbar/index";
-import { Container } from "react-bootstrap";
+
 import { Row, Col, Layout, Menu } from "antd";
 // import Row from "react-bootstrap/Row";
 // import Col from "react-bootstrap/Col";
