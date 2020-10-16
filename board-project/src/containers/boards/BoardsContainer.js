@@ -3,7 +3,7 @@ import db from "../../firebaseConfig";
 import Board from "../../components/board/Board";
 import BoardForm from "../../components/boardForm/BoardForm";
 import "antd/dist/antd.css";
-import { Card, List, Switch, Menu, Dropdown, Row, Col } from "antd";
+import { Card, List, Switch, Menu, Dropdown, Row, Col, Button } from "antd";
 import { byTitle, byTitleD, byDate, byDateD } from "../../functions";
 import SortBy from "../../components/sortBy/SortBy";
 import ListView from "../../components/listView";
@@ -56,45 +56,52 @@ const BoardsContainer = () => {
   };
 
   useEffect(() => {
-    return db.collection("boards").onSnapshot((snapshot) => {
-      if (snapshot.docChanges().length === 0) {
-        setIsLoading(false);
-      }
-      snapshot.docChanges().forEach((change) => {
-        if (change.type === "added") {
-          setBoards((prevBoards) => [
-            ...prevBoards,
-            { ...change.doc.data(), id: change.doc.id },
-          ]);
+    return db
+      .firestore()
+      .collection("boards")
+      .onSnapshot((snapshot) => {
+        if (snapshot.docChanges().length === 0) {
           setIsLoading(false);
         }
-        if (change.type === "modified") {
-          setBoards((prevBoards) => {
-            const newArrBoards = [...prevBoards];
-            let index = newArrBoards.findIndex((el) => el.id === change.doc.id);
-            if (index !== -1) {
-              newArrBoards[index] = {
-                ...change.doc.data(),
-                id: change.doc.id,
-              };
-            }
-            return newArrBoards;
-          });
-          setIsLoading(false);
-        }
-        if (change.type === "removed") {
-          setBoards((prevBoards) => {
-            const newArrBoards = [...prevBoards];
-            let index = newArrBoards.findIndex((el) => el.id === change.doc.id);
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === "added") {
+            setBoards((prevBoards) => [
+              ...prevBoards,
+              { ...change.doc.data(), id: change.doc.id },
+            ]);
+            setIsLoading(false);
+          }
+          if (change.type === "modified") {
+            setBoards((prevBoards) => {
+              const newArrBoards = [...prevBoards];
+              let index = newArrBoards.findIndex(
+                (el) => el.id === change.doc.id
+              );
+              if (index !== -1) {
+                newArrBoards[index] = {
+                  ...change.doc.data(),
+                  id: change.doc.id,
+                };
+              }
+              return newArrBoards;
+            });
+            setIsLoading(false);
+          }
+          if (change.type === "removed") {
+            setBoards((prevBoards) => {
+              const newArrBoards = [...prevBoards];
+              let index = newArrBoards.findIndex(
+                (el) => el.id === change.doc.id
+              );
 
-            if (index !== -1) {
-              newArrBoards.splice(index, 1);
-            }
-            return newArrBoards;
-          });
-        }
+              if (index !== -1) {
+                newArrBoards.splice(index, 1);
+              }
+              return newArrBoards;
+            });
+          }
+        });
       });
-    });
   }, []);
 
   const handleChange = () => {
@@ -104,6 +111,7 @@ const BoardsContainer = () => {
   const gridStyle = {
     margin: "15px",
     width: "30%",
+    borderRadius: "10px",
   };
 
   const dropdownView = () => {
@@ -123,6 +131,7 @@ const BoardsContainer = () => {
     marginRight: "2rem",
     // marginLeft: '7px',
   };
+
   return (
     <div>
       <Row className="content-header">
@@ -144,6 +153,7 @@ const BoardsContainer = () => {
                 src={BoardViewImg}
                 style={boardViewStyle}
                 onClick={(e) => e.preventDefault()}
+                alt="board icon"
               />
             </Dropdown>
           </Col>

@@ -18,7 +18,7 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
   const defaultDate = currentDate.toISOString().substr(0, 10);
 
   const [showResults, setShowResults] = React.useState(true);
-  const {Title} = Typography
+  const { Title } = Typography;
   const [userInput, setUserInput] = useState({
     title: task.title,
     due: task.due,
@@ -54,7 +54,8 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
   console.log(task);
 
   const handleClick = (e) => {
-    db.collection("boards")
+    db.firestore()
+      .collection("boards")
       .doc(boardsId)
       .update({
         items: firebase.firestore.FieldValue.arrayRemove(task),
@@ -129,10 +130,10 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
   const collapseStyle = {
     backgroundColor: "282934",
   };
-  
+
   return (
     <div style={style.items}>
-      <Collapse className="item-title"  defaultActiveKey={["1"]}>
+      <Collapse className="item-title" defaultActiveKey={["1"]}>
         <Panel header={task.title} key={task.id}>
           <p className="item-element">Assigner: {task.assigner}</p>
           <p className="item-element">Assignee: {task.assignee}</p>
@@ -160,7 +161,7 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
                   <DatePicker
                     onChange={(e) => handleDueChange(e)}
                     defaultValue={moment(defaultDate)}
-                    style={{color:"white"}}
+                    style={{ color: "white" }}
                   />
                   <input
                     name="assigner"

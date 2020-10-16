@@ -8,7 +8,7 @@ import { EditOutlined } from "@ant-design/icons";
 const Board = ({ boardTitle, boardsItems, boardsId }) => {
   const handleClick = (e) => {
     e.preventDefault();
-    db.collection("boards").doc(boardsId).delete();
+    db.firestore().collection("boards").doc(boardsId).delete();
   };
 
   const [editing, setEditing] = useState(false);
@@ -42,7 +42,7 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
 
   const editTitle = async () => {
     const newTitle = userInput;
-    await db.collection("boards").doc(boardsId).update({
+    await db.firestore().collection("boards").doc(boardsId).update({
       title: newTitle,
     });
   };
@@ -76,7 +76,12 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
   return (
     // <div className="site-card-wrapper">
 
-    <Card title={cardTitle} bordered={false} className="card">
+    <Card
+      title={cardTitle}
+      bordered={false}
+      style={{ borderRadius: "10px" }}
+      className="card"
+    >
       <Items
         boardTitle={boardTitle}
         boardsId={boardsId}

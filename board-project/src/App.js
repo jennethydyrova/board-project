@@ -1,20 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 // import Board from "./components/board/Board.js";
 import BoardsContainer from "./containers/boards/BoardsContainer";
-
 import "antd/dist/antd.css";
 import Sidebar from "./components/navbar/index";
-
 import { Row, Col, Layout, Menu } from "antd";
-// import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  useHistory,
+} from "react-router-dom";
 import About from "./components/about/index";
 import CompletedTasks from "./components/completed/index";
 import BoardForm from "./components/boardForm/BoardForm";
-import "./App.css"
+import "./App.css";
+import Login from "./components/login/index";
+import HeaderComponent from "./components/header/index";
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Sider, Content } = Layout;
 
 function App() {
   return (
@@ -24,10 +27,13 @@ function App() {
           <Sidebar />
         </Sider>
         <Layout className="layout">
-          <Header className="header" >Header</Header>
+          <Header className="header">
+            <HeaderComponent />
+          </Header>
           <Content className="content">
             {" "}
-            <Route exact path="/" component={BoardsContainer} />
+            <Route path="/login" component={Login} />
+            <Route exact path="/" component={BoardsContainer}></Route>
             <Route path="/about" component={About} />
             <Route path="/completed" component={CompletedTasks} />
           </Content>

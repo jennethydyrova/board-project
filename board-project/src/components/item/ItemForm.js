@@ -22,7 +22,7 @@ const ItemForm = ({ boardsItems, boardsId }) => {
     completed: false,
   });
 
-  const itemId = db.collection("boards").doc().id;
+  const itemId = db.firestore().collection("boards").doc().id;
 
   useEffect(() => {
     setItems(boardsItems);
@@ -31,6 +31,7 @@ const ItemForm = ({ boardsItems, boardsId }) => {
   const addItem = async () => {
     // console.log(boardsId)
     await db
+      .firestore()
       .collection("boards")
       .doc(boardsId)
       .update({
@@ -92,17 +93,20 @@ const ItemForm = ({ boardsItems, boardsId }) => {
           name="items"
           onChange={(e) => handleInputValue(e)}
           value={userInput.title}
+          style={{ width: "85%", marginTop: "0.5rem" }}
           className="input-field item-input"
           placeholder="Task title"
         />
-          <DatePicker
-            style={formStyle}
-            onChange={(e) => handleDueChange(e)}
-            value={userInput.due === null ? "" : moment(userInput.due)}
-            className="form-btn"
-          />
+        <DatePicker
+          style={formStyle}
+          style={{ width: "85%", marginTop: "0.5rem" }}
+          onChange={(e) => handleDueChange(e)}
+          value={userInput.due === null ? "" : moment(userInput.due)}
+          className="form-btn"
+        />
         <Input
           name="assigner"
+          style={{ width: "85%", marginTop: "0.5rem" }}
           onChange={(e) => handleAssignerChange(e)}
           value={userInput.assigner}
           className="input-field item-input"
@@ -110,6 +114,7 @@ const ItemForm = ({ boardsItems, boardsId }) => {
         />
         <Input
           name="assignee"
+          style={{ width: "85%", marginTop: "0.5rem" }}
           onChange={(e) => handleAssigneeChange(e)}
           value={userInput.assignee}
           className="input-field item-input"
