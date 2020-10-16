@@ -69,7 +69,6 @@ const ItemForm = ({ boardsItems, boardsId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addItem();
-    console.log("date", defaultDate);
     setUserInput({
       title: "",
       id: "",
@@ -78,7 +77,6 @@ const ItemForm = ({ boardsItems, boardsId }) => {
       assigner: "",
       completed: false,
     });
-    console.log("datt", userInput.due);
   };
 
   const formStyle = {

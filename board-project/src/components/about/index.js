@@ -8,9 +8,9 @@ const pageTitle = <Title className="about-title">
 About
 </Title>
 
-const jennet = <a href="https://github.com/jennethydyrova">Jennet HYDYROVA</a>;
-const majd = <a href="https://github.com/majdajroudi">Majd AJROUDI</a>;
-const recoded =<a href="https://www.re-coded.com/istanbul-coding-bootcamp-spring-2020"> Re:coded Frontend Development Bootcamp</a>;
+const jennet = <a className="anchor" href="https://github.com/jennethydyrova">Jennet HYDYROVA</a>;
+const majd = <a className="anchor" href="https://github.com/majdajroudi">Majd AJROUDI</a>;
+const recoded =<a className="anchor" href="https://www.re-coded.com/istanbul-coding-bootcamp-spring-2020"> Re:coded Frontend Development Bootcamp</a>;
 
 
 const aboutText = `This website was designed by ${<a href="https://github.com/jennethydyrova">Jennet HYDYROVA</a>} and ${majd} as a project for the \

@@ -25,7 +25,7 @@ const ListView = ({ boardTitle, boardsItems, boardsId }) => {
             boardsId={boardsId}
             boardsItems={boardsItems}
           />
-          <Button variant="outline-info"
+          <Button className="form-btn" variant="outline-info"
             type="submit"
             size="sm"
             onClick={(e) => handleClick(e)}>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "antd/dist/antd.css";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Collapse } from "antd";
-
 import db from "../../firebaseConfig";
 import * as firebase from "firebase/app";
 import Modal from "react-modal";
@@ -11,14 +10,13 @@ import { Row, Space, Checkbox, Button, Col, Form, Typography } from "antd";
 import "antd/dist/antd.css";
 import "moment/locale/zh-cn";
 import moment from "moment";
+import EditForm from "../EditForm/EditForm"
 
 const Item = ({ task, boardsId, boardsItems, setItems }) => {
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);
-  const defaultDate = currentDate.toISOString().substr(0, 10);
 
   const [showResults, setShowResults] = React.useState(true);
-  const {Title} = Typography
   const [userInput, setUserInput] = useState({
     title: task.title,
     due: task.due,
@@ -42,16 +40,6 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
       justifyContent: "space-between",
     },
   };
-  const modalStyle = {
-    content: {
-      display: "flex",
-      justifyContent: "center",
-      width: "500px",
-      height: "300px",
-    },
-  };
-
-  console.log(task);
 
   const handleClick = (e) => {
     db.collection("boards")
@@ -61,40 +49,9 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
       });
   };
 
-  const handleInputValue = (e) => {
-    setUserInput({ ...userInput, title: e.target.value, id: task.id });
-  };
 
-  const handleDueChange = (value) => {
-    message.info(
-      `Selected Date: ${value ? value.format("YYYY-MM-DD") : "None"}`
-    );
-    setUserInput({
-      ...userInput,
-      due: value.toDate().toISOString().substr(0, 10),
-    });
-  };
-
-  const editItem = async () => {
-    const modifiedItems = boardsItems;
-    const itemIndex = modifiedItems.findIndex((item) => item.id === task.id);
-    modifiedItems[itemIndex] = userInput;
-    await db.collection("boards").doc(boardsId).update({
-      items: modifiedItems,
-    });
-  };
-
-  const handleEdit = (e) => {
-    e.preventDefault();
-    editItem();
-    setModalOpened({
-      modalOpen: modalOpened.modalOpen === true ? false : true,
-    });
-  };
   useEffect(() => {
     setEditedTask(userInput);
-
-    // completeHandler()
   }, [userInput]);
 
   const handleModal = () => {
@@ -103,13 +60,6 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
     });
   };
 
-  const handleAssignerChange = (e) => {
-    setUserInput({ ...userInput, assigner: e.target.value });
-  };
-
-  const handleAssigneeChange = (e) => {
-    setUserInput({ ...userInput, assignee: e.target.value });
-  };
 
   const completeHandler = (e) => {
     e.preventDefault();
@@ -146,53 +96,10 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
           >
             Edit
           </Button>
-          <Modal isOpen={modalOpened.modalOpen} style={modalStyle}>
-            <Space direction="vertical" align="center">
-              <Form>
-                <Row>
-                  <input
-                    name="items"
-                    value={userInput.title}
-                    className="task-title"
-                    placeholder="Task title"
-                    onChange={(e) => handleInputValue(e)}
-                  />
-                  <DatePicker
-                    onChange={(e) => handleDueChange(e)}
-                    defaultValue={moment(defaultDate)}
-                    style={{color:"white"}}
-                  />
-                  <input
-                    name="assigner"
-                    value={userInput.assigner}
-                    placeholder="Assigner"
-                    onChange={(e) => handleAssignerChange(e)}
-                  />
-                </Row>
-
-                <Row>
-                  <input
-                    name="assignee"
-                    value={userInput.assignee}
-                    placeholder="Assignee"
-                    onChange={(e) => handleAssigneeChange(e)}
-                  />
-                </Row>
-
-                <Row>
-                  <Button
-                    variant="outline-info"
-                    type="submit"
-                    size="sm"
-                    onClick={(e) => handleEdit(e)}
-                  >
-                    Edit task
-                  </Button>
-                </Row>
-              </Form>
-              <Button onClick={(e) => handleModal(e)}>Close form</Button>
-            </Space>
-          </Modal>
+          <EditForm task={task} boardsId={boardsId} 
+              boardsItems={boardsItems} 
+              modalOpened={modalOpened} 
+              setModalOpened={setModalOpened} />
         </Panel>
       </Collapse>
       <Col style={{ marginLeft: "10px" }}>
