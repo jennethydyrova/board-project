@@ -16,16 +16,19 @@
 .board-btn {
   background-color: #7f53ac;
   background-image: linear-gradient(315deg, #7f53ac 0%, #647dee 74%);
+  color: white;
 }
 
 .board-btn:hover {
-  background-image: linear-gradient(315deg, #7f53ac 0%, #647dee 74%);
-  color: #5ec3cd;
-  border-color: #5ec3cd;
+  background-image: linear-gradient(315deg, #997eb4 0%, #6e83e4 74%);
+  color: #7f53ac;
+  border-color: #7f53ac;
 }
 .board-btn:focus {
   background-color: #7f53ac;
-  background-image: linear-gradient(315deg, #7f53ac 0%, #647dee 74%);
+  background-image: linear-gradient(315deg, #997eb4 0%, #6e83e4 74%);
+  color: #7f53ac;
+  border-color: #7f53ac;
 }
 
 .item-input {
@@ -61,18 +64,25 @@
 
 .ant-card-head {
   color: rgba(3, 1, 1, 0.777);
-  border-color: #5ec3cd;
+  border-color: #7f53ac;
 }
 
-.input-field {
+.input-field,
+.ant-input,
+.ant-input-group-addon {
   background-color: #282934;
   color: rgb(235, 230, 230);
 }
 
 .input-field:hover,
-.input-field:focus {
+.input-field:focus,
+.ant-input:hover,
+.ant-input:focus,
+.ant-input-group-addon:hover,
+.ant-input-group-addon:focus {
   background-color: #5c5d63;
   color: rgb(235, 230, 230);
+  border-color: #7f53ac;
 }
 
 .ant-picker-input > input {
@@ -94,10 +104,11 @@
   color: rgb(235, 230, 230);
 }
 
-.form-btn:hover {
-  background-color: #5c5d63;
-  color: #5ec3cd;
-  border-color: #5ec3cd;
+.form-btn:hover,
+.form-btn:focus {
+  background-color: #919299;
+  color: #7f53ac;
+  border-color: #7f53ac;
 }
 
 .title {
@@ -112,13 +123,15 @@
   background-color: rgb(35, 37, 48);
 }
 
-div.ant-collapse-content-box {
+div.ant-collapse-content {
   background-color: #5c5d63;
   color: rgb(235, 230, 230);
+  height: 100%;
 }
 
 .completed-card {
   background-color: #6f7177;
+  height: 100%;
 }
 
 .item-title {
@@ -147,8 +160,24 @@ h1.ant-typography {
   color: rgb(235, 230, 230);
 }
 
-.header {
-  display: flex;
-  align-self: right;
-  justify-content: flex-end;
+.anchor {
+  color: #7f53ac;
+  background: -webkit-linear-gradient(#7f53ac 0%, #647dee 74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ReactModal__Overlay {
+  z-index: 1000;
+  background-color: red;
+}
+
+.modal {
+  width: 450px;
+  height: 275px;
+  background-color: #5c5d63;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
 }

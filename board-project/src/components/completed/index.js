@@ -78,4 +78,47 @@ const CompletedTasks = () => {
   });
 };
 
+
+const gridStyle = {
+  width: '25%',
+  textAlign: 'center',
+  margin: '10px'
+};
+
+
+  
+  return (
+completedTaskList.map((item) => {
+  return (
+    <Collapse style={{ width: "100%" }} defaultActiveKey={["1"]} className="completed">
+ <Panel className="completed-panel" header={item.title} key={item.id}>
+   
+{item.items.filter((el) => el.completed === true ).map((el) => {
+return (
+  <Card.Grid className= "completed-card" title={el.title} style={gridStyle}>
+    <p>Title: {el.title}</p>
+    <p>Assigner: {el.assigner}</p>
+    <p>Assignee: {el.assignee}</p>
+    <p>Due date: {el.due}</p>
+   
+    
+  </Card.Grid>
+)
+
+  
+  
+})}
+</Panel>
+</Collapse>
+  )
+})
+  );
+};
+
+
+
+
+
+
+
 export default CompletedTasks;
