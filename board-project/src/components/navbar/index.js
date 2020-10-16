@@ -43,14 +43,14 @@ const Sider = () => {
         className="sider-element"
       >
         {/* <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One"> */}
-        <Menu.Item
+        {/* <Menu.Item
           className="navbarItem0"
           key="0"
           icon={<UserOutlined />}
           onClick={(e) => handleClick(e)}
         >
           <NavLink to="/login">Profile</NavLink>
-        </Menu.Item>
+        </Menu.Item> */}
         <Menu.Item
           className="navbarItem1"
           key="1"

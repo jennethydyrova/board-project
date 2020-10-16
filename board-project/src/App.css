@@ -169,7 +169,6 @@ h1.ant-typography {
 
 .ReactModal__Overlay {
   z-index: 1000;
-  background-color: red;
 }
 
 .modal {
@@ -180,4 +179,28 @@ h1.ant-typography {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) !important;
+}
+
+.header {
+  display: flex;
+  align-self: flex-end;
+  align-content: flex-end;
+}
+
+.login-button {
+  background-color: #7f53ac;
+  background-image: linear-gradient(315deg, #7f53ac 0%, #647dee 74%);
+  color: white;
+}
+
+.login-button:hover {
+  background-image: linear-gradient(315deg, #997eb4 0%, #6e83e4 74%);
+  color: #7f53ac;
+  border-color: #7f53ac;
+}
+.login-button:focus {
+  background-color: #7f53ac;
+  background-image: linear-gradient(315deg, #997eb4 0%, #6e83e4 74%);
+  color: #7f53ac;
+  border-color: #7f53ac;
 }

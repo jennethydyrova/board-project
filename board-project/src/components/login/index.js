@@ -1,5 +1,6 @@
 import { useHistory } from "react-router-dom";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Row } from "antd";
+import "antd/dist/antd.css";
 import React, { useState, useEffect } from "react";
 import firebase from "../../firebaseConfig";
 require("firebase/auth");
@@ -38,9 +39,9 @@ const Login = () => {
       .then(function () {
         console.log("history");
         history.push("/");
+        alert("You are in!");
       })
       .catch(function (error) {
-        console.log(error);
         switch (error) {
           case "auth/invalid-email":
           case "auth/email-already-in-use":
@@ -61,6 +62,7 @@ const Login = () => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
+      .then(alert("Thanks for registering!"))
       .catch(function (error) {
         switch (error) {
           case "auth/invalid-email":
@@ -84,62 +86,72 @@ const Login = () => {
   };
 
   return (
-    <Form
-      {...layout}
-      name="basic"
-      initialValues={{
-        remember: true,
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "10rem",
       }}
     >
-      <Form.Item
-        label="Email"
-        name="email"
-        value={email}
-        onChange={(e) => handleEmail(e)}
-        rules={[
-          {
-            required: true,
-            message: "Please input your username!",
-          },
-        ]}
+      <Form
+        {...layout}
+        name="basic"
+        initialValues={{
+          remember: true,
+        }}
       >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        label="Password"
-        name="password"
-        value={password}
-        onChange={(e) => handlePassword(e)}
-        rules={[
-          {
-            required: true,
-            message: "Please input your password!",
-          },
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
-
-      <Form.Item {...tailLayout}>
-        <Button
-          type="primary"
-          htmlType="submit"
-          onClick={(e) => handleSignIn(e)}
-        >
-          Sign In
-        </Button>
-      </Form.Item>
-      <Form.Item {...tailLayout}>
-        <Button
-          type="primary"
-          htmlType="submit"
-          onClick={(e) => handleSignUp(e)}
-        >
-          Sign Up
-        </Button>
-      </Form.Item>
-    </Form>
+        <Input
+          label="Email"
+          name="email"
+          value={email}
+          placeholder="Email"
+          onChange={(e) => handleEmail(e)}
+          style={{ width: "70%", margin: "0.5rem" }}
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        ></Input>
+        <Input
+          label="Password"
+          name="password"
+          value={password}
+          type="password"
+          placeholder="Password"
+          onChange={(e) => handlePassword(e)}
+          style={{ width: "70%", margin: "0.5rem" }}
+          rules={[
+            {
+              required: true,
+              message: "Please input your password!",
+            },
+          ]}
+        ></Input>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <Form.Item {...tailLayout}>
+            <Button
+              className="login-button"
+              htmlType="submit"
+              style={{ marginRight: "2rem", marginLeft: "0.5rem" }}
+              onClick={(e) => handleSignIn(e)}
+            >
+              Sign In
+            </Button>
+          </Form.Item>
+          <Form.Item {...tailLayout}>
+            <Button
+              className="login-button"
+              htmlType="submit"
+              onClick={(e) => handleSignUp(e)}
+            >
+              Sign Up
+            </Button>
+          </Form.Item>
+        </div>
+      </Form>
+    </div>
   );
 };
 

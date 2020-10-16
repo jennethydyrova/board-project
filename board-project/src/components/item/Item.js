@@ -10,17 +10,14 @@ import { Row, Space, Checkbox, Button, Col, Form, Typography } from "antd";
 import "antd/dist/antd.css";
 import "moment/locale/zh-cn";
 import moment from "moment";
-import EditForm from "../EditForm/EditForm"
+import EditForm from "../EditForm/EditForm";
 
 const Item = ({ task, boardsId, boardsItems, setItems }) => {
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);
 
   const [showResults, setShowResults] = React.useState(true);
-<<<<<<< HEAD
   const { Title } = Typography;
-=======
->>>>>>> c015f8f461aba14d15576801570b181695f76427
   const [userInput, setUserInput] = useState({
     title: task.title,
     due: task.due,
@@ -54,7 +51,6 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
       });
   };
 
-
   useEffect(() => {
     setEditedTask(userInput);
   }, [userInput]);
@@ -64,7 +60,6 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
       modalOpen: modalOpened.modalOpen === true ? false : true,
     });
   };
-
 
   const completeHandler = (e) => {
     e.preventDefault();
@@ -101,10 +96,13 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
           >
             Edit
           </Button>
-          <EditForm task={task} boardsId={boardsId} 
-              boardsItems={boardsItems} 
-              modalOpened={modalOpened} 
-              setModalOpened={setModalOpened} />
+          <EditForm
+            task={task}
+            boardsId={boardsId}
+            boardsItems={boardsItems}
+            modalOpened={modalOpened}
+            setModalOpened={setModalOpened}
+          />
         </Panel>
       </Collapse>
       <Col style={{ marginLeft: "1rem" }}>
