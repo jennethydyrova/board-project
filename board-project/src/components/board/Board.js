@@ -20,11 +20,21 @@ const handleEdit = () => {
 }
 
 const handleEnter = (e) => {
+  console.log(e.key)
   if (e.key === "Enter") {
     setEditing(false)
     editTitle()
     setUserInput("")
   }
+  else if (e.key ==="Escape"){
+    setUserInput("")
+    setEditing(false)
+  }
+}
+
+const handleBlur = () => {
+  setUserInput("")
+  setEditing(false)
 }
 
 const handleChange = (e) => {
@@ -51,9 +61,10 @@ const theTitle = <Title style={{color:"white"}} level={2}>
                   </Row>
                 </Title>;
 const editingTitle = <Title style={{color:"white"}} level={2}>
-  <Input placeholder="Enter new title name" className="input-field" 
+  <Input placeholder="Enter new title name (Esc to cancel)" className="input-field" 
   onKeyDown={(e) => handleEnter(e)}
-  onChange={(e) => handleChange(e)}/>
+  onChange={(e) => handleChange(e)}
+  onBlur={handleBlur}/>
   </Title>;
 
 const cardTitle = editing? editingTitle:theTitle 
