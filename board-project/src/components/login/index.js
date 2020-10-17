@@ -6,6 +6,7 @@ import firebase from "../../firebaseConfig";
 require("firebase/auth");
 
 const Login = () => {
+  const [redirect, setRedirect] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
@@ -38,7 +39,10 @@ const Login = () => {
       .signInWithEmailAndPassword(email, password)
       .then(function () {
         console.log("history");
-        history.push("/");
+        setTimeout(() => {
+          history.push("/");
+        }, 1500);
+
         alert("You are in!");
       })
       .catch(function (error) {

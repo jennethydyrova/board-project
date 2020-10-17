@@ -6,14 +6,14 @@ import { Card, Col, Row, Button, Typography, Input, Space } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 
 const Board = ({ boardTitle, boardsItems, boardsId }) => {
+  const [editing, setEditing] = useState(false);
+  const [userInput, setUserInput] = useState("");
+  const { Title } = Typography;
+
   const handleClick = (e) => {
     e.preventDefault();
     db.firestore().collection("boards").doc(boardsId).delete();
   };
-
-  const [editing, setEditing] = useState(false);
-  const [userInput, setUserInput] = useState("");
-  const { Title } = Typography;
 
   const handleEdit = () => {
     setEditing(true);
