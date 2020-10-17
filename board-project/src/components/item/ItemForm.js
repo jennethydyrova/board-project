@@ -6,9 +6,8 @@ import "moment/locale/zh-cn";
 import moment from "moment";
 
 const ItemForm = ({ boardsItems, boardsId }) => {
-
   const currentDate = new Date();
-  currentDate.setDate(currentDate.getDate() + 1);
+  currentDate.setDate(currentDate.getDate());
   const defaultDate = currentDate.toISOString().substr(0, 10);
 
   const [items, setItems] = useState(boardsItems);
@@ -46,9 +45,10 @@ const ItemForm = ({ boardsItems, boardsId }) => {
     message.info(
       `Selected Date: ${value ? value.format("YYYY-MM-DD") : "None"}`
     );
+
     setUserInput({
       ...userInput,
-      due: value === null ? value : value.toDate().toISOString().substr(0, 10),
+      due: value === null ? value : value.format("YYYY-MM-DD"),
     });
   };
 
