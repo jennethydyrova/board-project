@@ -59,6 +59,8 @@ const Login = () => {
   };
 
   const handleSignUp = () => {
+    setEmail("")
+    setPassword("")
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
