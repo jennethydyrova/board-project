@@ -1,14 +1,11 @@
-import React, {Component} from "react";
-import { DownOutlined,PlusOutlined } from '@ant-design/icons';
-import { Menu, Dropdown, message, Tooltip, Button, Select, Row, Col } from 'antd';
+import React from "react";
+import { Menu, Dropdown,  Row, Col } from 'antd';
 import sortImg from '../sortBy/sort.svg'
 
 export default function SortItemsBy({sortItems}) {
-    const {Option} = Select
     
     const handleClick = (e) => {
         sortItems(e.key)
-        // console.log(key)
     }
   
 const dropdownSort = () => {

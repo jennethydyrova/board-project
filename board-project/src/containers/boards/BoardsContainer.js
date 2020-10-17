@@ -3,7 +3,7 @@ import db from "../../firebaseConfig";
 import Board from "../../components/board/Board";
 import BoardForm from "../../components/boardForm/BoardForm";
 import "antd/dist/antd.css";
-import { Card, List, Switch, Menu, Dropdown, Row, Col, Button } from "antd";
+import { Card, List, Menu, Dropdown, Row, Col} from "antd";
 import { byTitle, byTitleD, byDate, byDateD } from "../../functions";
 import SortBy from "../../components/sortBy/SortBy";
 import ListView from "../../components/listView";
@@ -11,12 +11,9 @@ import BoardViewImg from "./chess-board.svg";
 
 const BoardsContainer = () => {
   const [boards, setBoards] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [sortedBy, setSortedBy] = useState("");
   const [listView, setListView] = useState(true);
 
   const sortBoards = (sortedBy) => {
-    console.log(sortedBy);
     switch (sortedBy) {
       case "2":
         setBoards((prevBoards) => {
@@ -61,7 +58,6 @@ const BoardsContainer = () => {
       .collection("boards")
       .onSnapshot((snapshot) => {
         if (snapshot.docChanges().length === 0) {
-          setIsLoading(false);
         }
         snapshot.docChanges().forEach((change) => {
           if (change.type === "added") {
@@ -69,7 +65,6 @@ const BoardsContainer = () => {
               ...prevBoards,
               { ...change.doc.data(), id: change.doc.id },
             ]);
-            setIsLoading(false);
           }
           if (change.type === "modified") {
             setBoards((prevBoards) => {
@@ -85,7 +80,6 @@ const BoardsContainer = () => {
               }
               return newArrBoards;
             });
-            setIsLoading(false);
           }
           if (change.type === "removed") {
             setBoards((prevBoards) => {
@@ -128,8 +122,7 @@ const BoardsContainer = () => {
     marginRight: "1rem",
   };
   const sortViewStyle = {
-    marginRight: "2rem",
-    // marginLeft: '7px',
+    marginRight: "2rem"
   };
 
   return (

@@ -4,12 +4,9 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { Collapse } from "antd";
 import db from "../../firebaseConfig";
 import * as firebase from "firebase/app";
-import Modal from "react-modal";
-import { DatePicker, message } from "antd";
-import { Row, Space, Checkbox, Button, Col, Form, Typography } from "antd";
+import { Checkbox, Button, Col, Typography } from "antd";
 import "antd/dist/antd.css";
 import "moment/locale/zh-cn";
-import moment from "moment";
 import EditForm from "../EditForm/EditForm";
 
 const Item = ({ task, boardsId, boardsItems, setItems }) => {
@@ -26,8 +23,6 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
     id: task.id,
     completed: task.completed,
   });
-
-  // const [checked, setChecked] = useState(false)
 
   const { Panel } = Collapse;
   const [modalOpened, setModalOpened] = useState({ modalOpen: false });

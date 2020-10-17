@@ -1,7 +1,7 @@
 
 import "antd/dist/antd.css";
-import { Col, Row} from "antd"
-import { Skeleton, Switch, Card, Avatar } from 'antd';
+import {  Row} from "antd"
+import { Skeleton, Card, Avatar } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import React from "react"
 

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import ItemForm from "../item/ItemForm";
+import React, { useState} from "react";
 import Items from "../../containers/items/Items";
 import db from "../../firebaseConfig";
 import { Card, Col, Row, Button, Typography, Input, Space } from "antd";
@@ -20,7 +19,6 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
   };
 
   const handleEnter = (e) => {
-    console.log(e.key);
     if (e.key === "Enter") {
       setEditing(false);
       editTitle();
@@ -74,7 +72,6 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
   const cardTitle = editing ? editingTitle : theTitle;
 
   return (
-    // <div className="site-card-wrapper">
 
     <Card
       title={cardTitle}
@@ -98,20 +95,7 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
         Delete Board
       </Button>
     </Card>
-
-    // </div>,
   );
 };
 
 export default Board;
-
-// <Card.Header></Card.Header>
-
-// <Button
-//   variant="outline-info"
-//   type="submit"
-//   size="sm"
-//   onClick={(e) => handleClick(e)}
-// >
-//   Delete Board
-// </Button>

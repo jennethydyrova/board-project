@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import db from "../../firebaseConfig";
 import "antd/dist/antd.css";
-import { Card, Col, Button, Form, Input } from "antd";
-import { DownOutlined, PlusOutlined } from "@ant-design/icons";
-import { Menu, Dropdown, message, Tooltip } from "antd";
+import { Card,  Button, Form, Input } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 
 const BoardForm = () => {
   const [newBoard, setNewBoard] = useState({
     title: "",
   });
 
-  // const docId = db.collection("boards").doc.id;
-  // console.log("docid", docId);
 
   const addBoard = async () => {
     const date = new Date();
@@ -21,9 +18,7 @@ const BoardForm = () => {
       items: [],
       date: stringDate,
     });
-    // fetchBoardData((prevState) => prevState + 1);
-  };
-  // console.log(docId);
+  }
   const handleInputValue = (e) => {
     setNewBoard({ ...newBoard, [e.target.name]: e.target.value });
   };
@@ -35,7 +30,6 @@ const BoardForm = () => {
       title: "",
     });
   };
-  console.log(newBoard.title);
 
   return (
     <Card
@@ -77,4 +71,4 @@ const BoardForm = () => {
   );
 };
 
-export default BoardForm;
+export default BoardForm

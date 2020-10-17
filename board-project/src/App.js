@@ -15,7 +15,6 @@ const { Header, Sider, Content } = Layout;
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  console.log(currentUser);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {

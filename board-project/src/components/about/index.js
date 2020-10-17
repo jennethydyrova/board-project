@@ -2,20 +2,23 @@ import React from "react";
 import "antd/dist/antd.css";
 import { PageHeader, Typography, Col } from "antd";
 
-const { Title } = Typography;
-const { Paragraph } = Typography;
-const pageTitle = <Title className="about-title">About</Title>;
 
-const jennet = <a href="https://github.com/jennethydyrova">Jennet Hydyrova</a>;
-const majd = <a href="https://github.com/majdajroudi">Majd Ajroudi</a>;
-const recoded = (
-  <a href="https://www.re-coded.com/istanbul-coding-bootcamp-spring-2020">
-    {" "}
-    Re:coded Frontend Web Development Bootcamp
-  </a>
-);
 
 const About = () => {
+
+  const { Title } = Typography;
+  const { Paragraph } = Typography;
+  const pageTitle = <Title className="about-title">About</Title>;
+
+  const jennet = <a className="link" href="https://github.com/jennethydyrova">Jennet Hydyrova</a>;
+  const majd = <a className="link" href="https://github.com/majdajroudi">Majd Ajroudi</a>;
+  const recoded = (
+    <a className="link" href="https://www.re-coded.com/istanbul-coding-bootcamp-spring-2020">
+      {" "}
+      Re:coded Frontend Web Development Bootcamp
+    </a>
+  );
+
   return (
     <>
       <Col span={16}>

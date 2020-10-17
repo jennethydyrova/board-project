@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import db from "../../firebaseConfig";
-import { DatePicker, message, Button, Form, Input, Row } from "antd";
+import { DatePicker, message, Button, Form, Input } from "antd";
 import "antd/dist/antd.css";
 import "moment/locale/zh-cn";
 import moment from "moment";
 
 const ItemForm = ({ boardsItems, boardsId }) => {
-  // const [items, setItems] = useState(oneBoard);
 
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);
@@ -29,7 +28,6 @@ const ItemForm = ({ boardsItems, boardsId }) => {
   }, [boardsItems]);
 
   const addItem = async () => {
-    // console.log(boardsId)
     await db
       .firestore()
       .collection("boards")
@@ -39,20 +37,15 @@ const ItemForm = ({ boardsItems, boardsId }) => {
       });
     setItems([...items, userInput]);
   };
-  // console.log("items", items);
-  // useEffect(() => {}, []);
 
   const handleInputValue = (e) => {
-    console.log(userInput);
     setUserInput({ ...userInput, title: e.target.value, id: itemId });
   };
 
   const handleDueChange = (value) => {
-    console.log("dueCHage", value);
     message.info(
       `Selected Date: ${value ? value.format("YYYY-MM-DD") : "None"}`
     );
-    // console.log("asdas",value.toDate().toISOString().substr(0,10))
     setUserInput({
       ...userInput,
       due: value === null ? value : value.toDate().toISOString().substr(0, 10),

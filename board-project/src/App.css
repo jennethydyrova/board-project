@@ -160,11 +160,14 @@ h1.ant-typography {
   color: rgb(235, 230, 230);
 }
 
-.anchor {
+
+a.ant-typography, .ant-typography a{
+  color: rgb(235, 230, 230);
+  text-decoration: underline;
+}
+
+a.ant-typography, .ant-typography a:hover{
   color: #7f53ac;
-  background: -webkit-linear-gradient(#7f53ac 0%, #647dee 74%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .ReactModal__Overlay {

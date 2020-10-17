@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 import { NavLink } from "react-router-dom";
-import { Menu, Switch } from "antd";
+import { Menu } from "antd";
 import {
   HomeOutlined,
   CheckOutlined,
-  QuestionCircleOutlined,
-  UserOutlined,
+  QuestionCircleOutlined
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
-// const [collapsed, setCollapsed] = useState(true);
 
 const Sider = () => {
   const [theme, setTheme] = useState({
@@ -20,7 +17,6 @@ const Sider = () => {
   });
 
   const handleClick = (e) => {
-    console.log("click ", e);
     setTheme({ ...theme, current: e.key });
   };
 
@@ -42,15 +38,6 @@ const Sider = () => {
         mode="inline"
         className="sider-element"
       >
-        {/* <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One"> */}
-        {/* <Menu.Item
-          className="navbarItem0"
-          key="0"
-          icon={<UserOutlined />}
-          onClick={(e) => handleClick(e)}
-        >
-          <NavLink to="/login">Profile</NavLink>
-        </Menu.Item> */}
         <Menu.Item
           className="navbarItem1"
           key="1"
@@ -80,5 +67,4 @@ const Sider = () => {
   );
 };
 
-// ReactDOM.render(<Sider />, document.getElementById("container"));
 export default Sider;

@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ItemForm from "../item/ItemForm";
 import Items from "../../containers/items/Items";
-// import Card from "react-bootstrap/Card";
-// import Button from "react-bootstrap/Button";
 import db from "../../firebaseConfig";
-// import { Container } from "react-bootstrap";
-// import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
 import { Card, Col, Row, Button, Typography, Input, Space } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 
@@ -78,7 +72,6 @@ const ListView = ({ boardTitle, boardsItems, boardsId }) => {
   const cardTitle = editing ? editingTitle : theTitle;
 
   return (
-    // <div className="site-card-wrapper">
 
     <Card
       title={cardTitle}
@@ -101,7 +94,6 @@ const ListView = ({ boardTitle, boardsItems, boardsId }) => {
       </Button>
     </Card>
 
-    // </div>,
   );
 };
 
