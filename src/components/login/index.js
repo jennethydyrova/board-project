@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import { Form, Input, Button, Row } from "antd";
+import { Form, Input, Button } from "antd";
 import "antd/dist/antd.css";
 import React, { useState, useEffect } from "react";
 import firebase from "../../firebaseConfig";
@@ -8,7 +8,9 @@ require("firebase/auth");
 const Login = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  // eslint-disable-next-line
   const [error, setError] = useState("");
+  // eslint-disable-next-line
   const [currentUser, setCurrentUser] = useState(null);
 
   const history = useHistory();

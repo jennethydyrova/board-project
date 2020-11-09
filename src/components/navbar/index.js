@@ -5,10 +5,8 @@ import { Menu } from "antd";
 import {
   HomeOutlined,
   CheckOutlined,
-  QuestionCircleOutlined
+  QuestionCircleOutlined,
 } from "@ant-design/icons";
-
-const { SubMenu } = Menu;
 
 const Sider = () => {
   const [theme, setTheme] = useState({
@@ -20,16 +18,10 @@ const Sider = () => {
     setTheme({ ...theme, current: e.key });
   };
 
-  const buttonBackground = {
-    backgroundColor: "#36096d",
-    backgroundImmage: "linear-gradient(315deg, #36096d 0%, #37d5d6 74%)",
-  };
-
   return (
     <>
       <br />
       <br />
-
       <Menu
         theme={theme.theme}
         style={{ width: "100%", backgroundColor: "rgb(41, 44, 56)" }}

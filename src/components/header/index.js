@@ -5,6 +5,7 @@ import "antd/dist/antd.css";
 import { Button } from "antd";
 
 const Header = () => {
+  // eslint-disable-next-line
   const [error, setError] = useState("");
 
   const history = useHistory();

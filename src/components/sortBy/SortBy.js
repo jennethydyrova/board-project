@@ -1,14 +1,8 @@
 import React from "react";
-import {
-  Menu,
-  Dropdown,
-  Row,
-  Col,
-} from "antd";
+import { Menu, Dropdown, Row, Col } from "antd";
 import sortImg from "./sort.svg";
 
 export default function SortBy({ sortBoards }) {
-
   const handleClick = (e) => {
     sortBoards(e.key);
   };
@@ -49,6 +43,7 @@ export default function SortBy({ sortBoards }) {
               src={sortImg}
               style={styleSortImg}
               onClick={(e) => e.preventDefault()}
+              alt="Sort Icon"
             ></img>
           </Dropdown>
         </Col>

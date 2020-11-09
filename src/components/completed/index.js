@@ -5,7 +5,6 @@ import { Collapse, Card } from "antd";
 const CompletedTasks = () => {
   const [completedTaskList, setCompletedTaskList] = useState([]);
   const { Panel } = Collapse;
-  const [modalOpened, setModalOpened] = useState({ modalOpen: false });
 
   const fetchCompletedTasks = async () => {
     const res = await db.firestore().collection("boards").get();
@@ -18,10 +17,11 @@ const CompletedTasks = () => {
     }
     return completedTaskList;
   };
+
   useEffect(() => {
     fetchCompletedTasks();
+    // eslint-disable-next-line
   }, []);
-
 
   const gridStyle = {
     width: "25%",

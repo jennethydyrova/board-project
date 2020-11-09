@@ -89,7 +89,6 @@ const ItemForm = ({ boardsItems, boardsId }) => {
           placeholder="Task title"
         />
         <DatePicker
-          style={formStyle}
           style={{ width: "85%", marginTop: "0.5rem" }}
           onChange={(e) => handleDueChange(e)}
           value={userInput.due === null ? "" : moment(userInput.due)}

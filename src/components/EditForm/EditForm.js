@@ -15,6 +15,7 @@ const EditForm = ({
   task,
   boardsId,
 }) => {
+  const [editedTask, setEditedTask] = useState(task);
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);
   const defaultDate = currentDate.toISOString().substr(0, 10);
@@ -60,7 +61,7 @@ const EditForm = ({
 
   const handleEdit = (e) => {
     e.preventDefault();
-    editItem();
+    editItem(editedTask);
     setModalOpened({
       modalOpen: modalOpened.modalOpen === true ? false : true,
     });
@@ -84,19 +85,16 @@ const EditForm = ({
     setUserInput({ ...userInput, assignee: e.target.value });
   };
 
-  const [editedTask, setEditedTask] = useState(task);
-
   return (
     <Modal className="modal" isOpen={modalOpened.modalOpen}>
       <Space direction="vertical" align="center">
-        <Form>
+        <Form style={formStyle}>
           <Input
             name="items"
             value={userInput.title}
             className="task-title input-field item-input"
             placeholder="Task title"
             onChange={(e) => handleInputValue(e)}
-            style={formStyle}
             addonBefore="Title"
           />
           <DatePicker
@@ -104,7 +102,6 @@ const EditForm = ({
             defaultValue={moment(defaultDate)}
             style={{ color: "white" }}
             className="form-btn"
-            style={formStyle}
             addonBefore="Due date"
           />
           <Input
@@ -113,7 +110,6 @@ const EditForm = ({
             placeholder="Assigner"
             onChange={(e) => handleAssignerChange(e)}
             className="input-field item-input"
-            style={formStyle}
             addonBefore="Assigner"
           />
           <Input
@@ -122,7 +118,6 @@ const EditForm = ({
             placeholder="Assignee"
             onChange={(e) => handleAssigneeChange(e)}
             className="input-field item-input"
-            style={formStyle}
             addonBefore="Assignee"
           />
           <Button
@@ -131,16 +126,11 @@ const EditForm = ({
             size="sm"
             onClick={(e) => handleEdit(e)}
             className="form-btn"
-            style={formStyle}
           >
             Edit task
           </Button>
         </Form>
-        <Button
-          className="form-btn"
-          onClick={(e) => handleModal(e)}
-          style={formStyle}
-        >
+        <Button className="form-btn" onClick={(e) => handleModal(e)}>
           Close form
         </Button>
       </Space>

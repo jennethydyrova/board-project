@@ -1,7 +1,7 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import Items from "../../containers/items/Items";
 import db from "../../firebaseConfig";
-import { Card, Col, Row, Button, Typography, Input, Space } from "antd";
+import { Card, Col, Row, Button, Typography, Input } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 
 const Board = ({ boardTitle, boardsItems, boardsId }) => {
@@ -72,7 +72,6 @@ const Board = ({ boardTitle, boardsItems, boardsId }) => {
   const cardTitle = editing ? editingTitle : theTitle;
 
   return (
-
     <Card
       title={cardTitle}
       bordered={false}

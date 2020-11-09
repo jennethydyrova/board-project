@@ -3,18 +3,16 @@ import "antd/dist/antd.css";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Collapse } from "antd";
 import db from "../../firebaseConfig";
-import * as firebase from "firebase/app";
-import { Checkbox, Button, Col, Typography } from "antd";
+import { Checkbox, Button, Col } from "antd";
 import "antd/dist/antd.css";
 import "moment/locale/zh-cn";
 import EditForm from "../EditForm/EditForm";
 
-const Item = ({ task, boardsId, boardsItems, setItems }) => {
+const Item = ({ task, boardsId, boardsItems }) => {
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);
 
   const [showResults, setShowResults] = React.useState(true);
-  const { Title } = Typography;
   const [userInput, setUserInput] = useState({
     title: task.title,
     due: task.due,
@@ -26,7 +24,6 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
 
   const { Panel } = Collapse;
   const [modalOpened, setModalOpened] = useState({ modalOpen: false });
-
   const [editedTask, setEditedTask] = useState(task);
 
   const style = {
@@ -45,10 +42,10 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
         items: db.firestore.FieldValue.arrayRemove(task),
       });
   };
-  console.log(task);
 
   useEffect(() => {
     setEditedTask(userInput);
+    setUserInput("");
   }, [userInput]);
 
   const handleModal = () => {
@@ -72,10 +69,6 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
     });
   };
 
-  const collapseStyle = {
-    backgroundColor: "282934",
-  };
-
   return (
     <div style={style.items}>
       <Collapse className="item-title" defaultActiveKey={["1"]}>
@@ -93,10 +86,12 @@ const Item = ({ task, boardsId, boardsItems, setItems }) => {
             Edit
           </Button>
           <EditForm
+            showResults={showResults}
             task={task}
             boardsId={boardsId}
             boardsItems={boardsItems}
             modalOpened={modalOpened}
+            editedTask={editedTask}
             setModalOpened={setModalOpened}
           />
         </Panel>
